@@ -4,6 +4,8 @@ import lombok.Getter;
 import me.saiintbrisson.commands.CommandFrame;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.event.Listener;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public abstract class WinterPlugin extends JavaPlugin {
@@ -35,6 +37,13 @@ public abstract class WinterPlugin extends JavaPlugin {
         frame.registerType(OfflinePlayer.class, Bukkit::getOfflinePlayer);
     }
 
+    protected void registerListeners(Listener... listeners) {
+        final PluginManager manager = Bukkit.getPluginManager();
+
+        for (Listener listener : listeners) {
+            manager.registerEvents(listener, this);
+        }
+    }
 
     public abstract void onPluginStart();
 

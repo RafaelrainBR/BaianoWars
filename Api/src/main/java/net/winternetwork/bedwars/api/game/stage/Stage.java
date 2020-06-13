@@ -1,21 +1,29 @@
 package net.winternetwork.bedwars.api.game.stage;
 
+import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import net.winternetwork.bedwars.api.game.flag.Flag;
 import org.bukkit.Bukkit;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @Getter
-@RequiredArgsConstructor
 public abstract class Stage {
 
     private final String stageName;
 
-    private final int Time;
-    private final TimeUnit timeUnit;
+    private final int time;
+
+    @Setter(value = AccessLevel.PROTECTED)
+    private int timeLeft;
+
+    public Stage(String name, int time) {
+        this.stageName = name;
+        this.time = time;
+
+        this.timeLeft = time;
+    }
 
     public abstract List<Flag> getFlags();
 
@@ -35,5 +43,9 @@ public abstract class Stage {
 
     protected int getOnlinePlayers() {
         return Bukkit.getOnlinePlayers().size();
+    }
+
+    public void operateTime() {
+        this.timeLeft = timeLeft - 1;
     }
 }

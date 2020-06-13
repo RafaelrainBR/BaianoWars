@@ -1,42 +1,31 @@
 package net.winternetwork.bedwars.core.game;
 
 import lombok.Getter;
-import net.winternetwork.bedwars.api.game.stage.Stage;
-import net.winternetwork.bedwars.core.game.stage.WaitingPlayerStage;
+import net.winternetwork.bedwars.core.Core;
+import net.winternetwork.bedwars.core.game.stage.StageManager;
 
 public class Game {
 
-    @Getter(lazy = true)
-    private static final Game game = new Game();
-
-    private static final Stage[] STAGE_ARRAY = {
-            new WaitingPlayerStage(),
-
-    };
-    private int stageNumber = -1;
+    private static Game game;
     @Getter
-    private Stage actualStage;
+    private StageManager stageManager;
+    @Getter
+    private GameScheduler scheduler;
+
+    public static Game getGame() {
+        return game == null ? game = new Game() : game;
+    }
 
     private Game() {
         startGame();
     }
 
-    public static void callNextStage() {
-        Game game = getGame();
-
-        Stage stage = game.actualStage;
-
-        if (stage != null) {
-            stage.onStageExit();
-        }
-
-        game.actualStage = STAGE_ARRAY[++game.stageNumber];
-
-        game.actualStage.onStageJoin();
-    }
-
     private void startGame() {
-        callNextStage();
+        this.stageManager = StageManager.getInstance();
+
+        this.scheduler = new GameScheduler(this);
+
+        Core.getInstance().registerFlagListener();
     }
 
 }
