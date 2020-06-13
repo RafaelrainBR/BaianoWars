@@ -52,6 +52,11 @@ public class MapSetupCommand {
 
         if (map == null) throw new Exception("não foi encontrado nenhum mapa com este nome");
 
+        if (number > map.getMaxPlayers()) {
+            execution.sendMessage("§eEste mapa tem como limite %s jogadores.", map.getMaxPlayers());
+            return;
+        }
+
         map.setLocation(number, execution.getPlayer().getLocation());
 
         execution.sendMessage("Location setada com sucesso!");

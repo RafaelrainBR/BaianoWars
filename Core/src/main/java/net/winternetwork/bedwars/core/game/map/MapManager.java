@@ -1,6 +1,7 @@
 package net.winternetwork.bedwars.core.game.map;
 
 import net.winternetwork.bedwars.api.config.YamlConfig;
+import net.winternetwork.bedwars.core.game.map.adapter.LocationAdapter;
 import net.winternetwork.bedwars.core.game.map.adapter.MapAdapter;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -12,7 +13,10 @@ import java.util.Map;
 public class MapManager {
 
     private static MapManager instance;
+
     private final MapAdapter mapAdapter = new MapAdapter();
+    private final LocationAdapter locationAdapter = new LocationAdapter();
+
     private final Map<String, GameMap> MAP_CACHE = new LinkedHashMap<>();
 
     private MapManager() {
@@ -38,12 +42,16 @@ public class MapManager {
     }
 
     public void unloadAll(YamlConfig config) {
-        ConfigurationSection maps = config.getConfigurationSection("maps");
-
         for (GameMap value : getAll()) {
-            ConfigurationSection section = config.getConfigurationSection("maps." + value.getName());
+            String prefix = "maps." + value.getName();
 
-            mapAdapter.applyTo(value, section);
+            config.set(prefix + ".maxPlayers", value.getMaxPlayers());
+            config.set(prefix + ".lobbyLocation", locationAdapter.to(value.getLobbyLocation()));
+
+            config.createSection(prefix + ".locations");
+            for (int i = 0; i < value.getSpawnLocations().length; i++) {
+                config.set(prefix + ".locations." + (i + 1), locationAdapter.to(value.getSpawnLocations()[i]));
+            }
         }
 
         config.save();

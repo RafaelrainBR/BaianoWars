@@ -30,15 +30,4 @@ public class MapAdapter {
                 .spawnLocations(spawnLocations)
                 .build();
     }
-
-
-    public void applyTo(GameMap map, ConfigurationSection section) {
-        section.set("maxPlayers", map.getMaxPlayers());
-        section.set("lobbyLocation", locationAdapter.to(map.getLobbyLocation()));
-
-        section.createSection("locations");
-        for (int i = 0; i < map.getSpawnLocations().length; i++) {
-            section.set("locations." + (i + 1), locationAdapter.to(map.getSpawnLocations()[i]));
-        }
-    }
 }

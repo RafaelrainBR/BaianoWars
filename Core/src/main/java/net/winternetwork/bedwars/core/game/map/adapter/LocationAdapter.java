@@ -16,9 +16,7 @@ public class LocationAdapter implements Adapter<Location, String> {
                 Bukkit.getWorld(split[0]),
                 Double.parseDouble(split[1]),
                 Double.parseDouble(split[2]),
-                Double.parseDouble(split[3]),
-                Float.parseFloat(split[4]),
-                Float.parseFloat(split[5])
+                Double.parseDouble(split[3])
         );
     }
 
@@ -29,8 +27,7 @@ public class LocationAdapter implements Adapter<Location, String> {
         text.add(loc.getWorld().getName());
         text.add(String.valueOf(loc.getX()));
         text.add(String.valueOf(loc.getY()));
-        text.add(String.valueOf(loc.getYaw()));
-        text.add(String.valueOf(loc.getPitch()));
+        text.add(String.valueOf(loc.getZ()));
 
         return String.join(";", text);
     }
