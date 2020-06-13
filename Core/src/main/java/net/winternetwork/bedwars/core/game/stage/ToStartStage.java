@@ -4,6 +4,9 @@ import net.winternetwork.bedwars.api.game.flag.Flag;
 import net.winternetwork.bedwars.api.game.stage.Stage;
 import net.winternetwork.bedwars.core.game.GameSettings;
 import net.winternetwork.bedwars.core.game.flag.Flags;
+import net.winternetwork.bedwars.core.game.map.GameMap;
+import net.winternetwork.bedwars.core.game.map.MapManager;
+import org.bukkit.entity.Player;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,10 +18,13 @@ public class ToStartStage extends Stage {
         super("Começando.", 20);
     }
 
+    private boolean started = false;
+
     @Override
     public List<Flag> getFlags() {
         return Arrays.asList(
-                Flags.NO_PVP
+                Flags.NO_PVP,
+                Flags.NO_BUILD
         );
     }
 
@@ -28,6 +34,10 @@ public class ToStartStage extends Stage {
 
     @Override
     public void onSecondPassed() {
+
+        if (getTimeLeft() <= 0) {
+            StageManager.getInstance().callNextStage();
+        }
 
         if (getTimeLeft() <= 5) {
             broadcast(
@@ -45,11 +55,21 @@ public class ToStartStage extends Stage {
             return;
         }
 
+        started = true;
         StageManager.getInstance().callNextStage();
     }
 
     @Override
     public void onStageExit() {
+        if (!started) return;
         broadcast("Começou!");
+
+        GameMap map = MapManager.getInstance().getAll().get(0);
+
+        for (int i = 0; i < getAllPlayers().size(); i++) {
+            Player player = getAllPlayers().get(i);
+
+            player.teleport(map.getSpawnLocations()[i]);
+        }
     }
 }

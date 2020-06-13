@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import net.winternetwork.bedwars.api.game.flag.Flag;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -35,17 +37,22 @@ public abstract class Stage {
 
     public abstract void onStageExit();
 
-    protected void broadcast(String... messages) {
+    public final void operateTime() {
+        this.timeLeft = timeLeft - 1;
+    }
+
+    protected final void broadcast(String... messages) {
         for (String message : messages) {
             Bukkit.broadcastMessage(message);
         }
     }
 
-    protected int getOnlinePlayers() {
+    protected final int getOnlinePlayers() {
         return Bukkit.getOnlinePlayers().size();
     }
 
-    public void operateTime() {
-        this.timeLeft = timeLeft - 1;
+    protected final List<Player> getAllPlayers() {
+        return new ArrayList<>(Bukkit.getOnlinePlayers());
     }
+
 }

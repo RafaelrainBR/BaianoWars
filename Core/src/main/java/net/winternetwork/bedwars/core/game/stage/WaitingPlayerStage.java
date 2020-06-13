@@ -20,7 +20,8 @@ public class WaitingPlayerStage extends Stage {
     @Override
     public List<Flag> getFlags() {
         return Arrays.asList(
-                Flags.NO_PVP
+                Flags.NO_PVP,
+                Flags.NO_BUILD
         );
     }
 
@@ -29,7 +30,7 @@ public class WaitingPlayerStage extends Stage {
         final int online = getOnlinePlayers();
 
         broadcast(
-                String.format("§eTemos %d jogadores online.", online),
+                String.format("§eTemos %d jogador%s online.", online, online > 1 ? "es" : ""),
                 String.format(
                         "§ePara o jogo começar, precisamos de mais %d.",
                         GameSettings.PLAYERS_TO_START - online
