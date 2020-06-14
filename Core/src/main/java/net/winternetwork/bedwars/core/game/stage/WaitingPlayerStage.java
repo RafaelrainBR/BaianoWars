@@ -2,6 +2,7 @@ package net.winternetwork.bedwars.core.game.stage;
 
 import net.winternetwork.bedwars.api.game.flag.Flag;
 import net.winternetwork.bedwars.api.game.stage.Stage;
+import net.winternetwork.bedwars.api.score.ReplaceableList;
 import net.winternetwork.bedwars.core.game.GameSettings;
 import net.winternetwork.bedwars.core.game.flag.Flags;
 
@@ -22,6 +23,24 @@ public class WaitingPlayerStage extends Stage {
         return Arrays.asList(
                 Flags.NO_PVP,
                 Flags.NO_BUILD
+        );
+    }
+
+    @Override
+    public ReplaceableList getScoreboard() {
+        return new ReplaceableList(
+                Arrays.asList(
+                        "&1",
+                        "&eEsperando mais <waiting> jogadores.",
+                        "&ePróxima verificação: &f<next>.",
+                        "&2",
+                        "&eJogadores online: <online>",
+                        "&3"
+                ),
+                (s, player) -> s
+                        .replaceAll("<online>", getOnlinePlayers() + "")
+                        .replaceAll("<waiting>", String.valueOf(GameSettings.PLAYERS_TO_START - getOnlinePlayers()))
+                        .replaceAll("<next>", String.format("%ss", getTimeLeft()))
         );
     }
 

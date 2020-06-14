@@ -16,6 +16,9 @@ public class Game {
 
     private MapManager mapManager;
 
+    @Getter
+    int timeElapsed = 0;
+
     public static Game getGame() {
         return game == null ? game = new Game() : game;
     }

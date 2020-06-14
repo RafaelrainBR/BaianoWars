@@ -1,9 +1,13 @@
 package net.winternetwork.bedwars.core.game;
 
 import net.winternetwork.bedwars.api.game.stage.Stage;
+import net.winternetwork.bedwars.api.score.Score;
 import net.winternetwork.bedwars.core.Core;
 import net.winternetwork.bedwars.core.game.stage.StageManager;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
+import java.util.List;
 
 public class GameScheduler {
 
@@ -16,13 +20,21 @@ public class GameScheduler {
 
         Bukkit.getScheduler().runTaskTimerAsynchronously(
                 Core.getInstance(),
-                this::scheduleTime,
+                this::scheduleGame,
                 0,
                 20
         );
     }
 
+    private void scheduleGame() {
+        scheduleTime();
+
+        scheduleScore();
+    }
+
     private void scheduleTime() {
+        ++game.timeElapsed;
+
         final Stage stage = stageManager.getActualStage();
 
         System.out.println(stage.getTimeLeft());
@@ -32,6 +44,23 @@ public class GameScheduler {
 
         if (stage.getTimeLeft() <= 0) {
             stage.onTimeLeft();
+        }
+    }
+
+    private void scheduleScore() {
+        final Stage stage = stageManager.getActualStage();
+
+        final Score score = new Score("&e&lBAIANO WARS");
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            List<String> lines = stage.getScoreboard().call(player);
+
+            for (int i = lines.size(); i > 0; i--) {
+                int id = i - 1;
+                score.setLine(id, lines.get(id));
+            }
+
+            score.show(player);
         }
     }
 }

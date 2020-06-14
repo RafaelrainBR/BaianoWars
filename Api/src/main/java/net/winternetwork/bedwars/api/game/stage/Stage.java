@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import net.winternetwork.bedwars.api.game.flag.Flag;
+import net.winternetwork.bedwars.api.score.ReplaceableList;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -28,6 +29,8 @@ public abstract class Stage {
     }
 
     public abstract List<Flag> getFlags();
+
+    public abstract ReplaceableList getScoreboard();
 
     public abstract void onStageJoin();
 
