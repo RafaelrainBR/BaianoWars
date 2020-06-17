@@ -26,6 +26,8 @@ public class LocationAdapter implements Adapter<Location, String> {
     public String to(Location loc) {
         List<String> text = new ArrayList<>();
 
+        System.out.println("Before:" + loc.toString());
+
         text.add(loc.getWorld().getName());
         text.add(String.valueOf(loc.getX()));
         text.add(String.valueOf(loc.getY()));

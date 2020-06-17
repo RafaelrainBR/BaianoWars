@@ -25,6 +25,7 @@ public class ToStartStage extends Stage {
     public List<Flag> getFlags() {
         return Arrays.asList(
                 Flags.NO_PVP,
+                Flags.NO_BREAK,
                 Flags.NO_BUILD
         );
     }
@@ -42,7 +43,7 @@ public class ToStartStage extends Stage {
                         "&ewww.baianowars.kt"
                 ),
                 (s, player) -> s
-                        .replaceAll("<mapa>", "Void")
+                        .replaceAll("<mapa>", "Gadolandia")
                         .replaceAll("<online>", getOnlinePlayers() + "")
                         .replaceAll("<max>", "15")
                         .replaceAll("<next>", String.format("%ss", getTimeLeft()))

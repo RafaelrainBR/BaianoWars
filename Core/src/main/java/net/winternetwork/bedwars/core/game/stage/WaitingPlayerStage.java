@@ -22,6 +22,7 @@ public class WaitingPlayerStage extends Stage {
     public List<Flag> getFlags() {
         return Arrays.asList(
                 Flags.NO_PVP,
+                Flags.NO_BREAK,
                 Flags.NO_BUILD
         );
     }
@@ -40,7 +41,7 @@ public class WaitingPlayerStage extends Stage {
                 ),
                 (s, player) -> s
                         .replaceAll("<waiting>", String.valueOf(GameSettings.PLAYERS_TO_START - getOnlinePlayers()))
-                        .replaceAll("<mapa>", "Void")
+                        .replaceAll("<mapa>", "Gadolandia")
                         .replaceAll("<online>", getOnlinePlayers() + "")
                         .replaceAll("<max>", "15")
         );

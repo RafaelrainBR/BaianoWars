@@ -1,5 +1,7 @@
 package net.winternetwork.bedwars.core.listener;
 
+import net.winternetwork.bedwars.core.game.Game;
+import net.winternetwork.bedwars.core.game.map.GameMap;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,6 +21,11 @@ public class GameListener implements Listener {
                         15
                 )
         );
+
+        GameMap map = Game.getGame().getMapManager().getAll().get(0);
+        if (map != null) {
+            e.getPlayer().teleport(map.getLobbyLocation());
+        }
     }
 
     @EventHandler

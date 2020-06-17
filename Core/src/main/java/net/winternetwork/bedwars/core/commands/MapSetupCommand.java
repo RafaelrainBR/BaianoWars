@@ -45,7 +45,7 @@ public class MapSetupCommand {
     @Command(
             name = "map.setlocation",
             permission = "bedwars.command.map",
-            usage = "/map setlocation <name> <number>"
+            usage = "map setlocation <name> <number>"
     )
     public void setLocation(Execution execution, String name, int number) throws Exception {
         GameMap map = mapManager.get(name);

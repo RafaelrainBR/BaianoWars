@@ -52,7 +52,7 @@ public class FlagListener implements Listener {
         final Stage stage = stageManager.getActualStage();
 
         for (Flag flag : stage.getFlags()) {
-            if (flag.getEventClass() != BlockPlaceEvent.class) continue;
+            if (flag.getEventClass() != BlockBreakEvent.class) continue;
 
             flag.execute(e);
         }

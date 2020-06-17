@@ -36,7 +36,8 @@ public class StageManager {
     }
 
     public void callPreviousStage() {
-        actualStage = GameSettings.STAGE_ARRAY[--stageId];
+        stageId = stageId - 1;
+        actualStage = GameSettings.STAGE_ARRAY[stageId];
 
         actualStage.onStageJoin();
     }

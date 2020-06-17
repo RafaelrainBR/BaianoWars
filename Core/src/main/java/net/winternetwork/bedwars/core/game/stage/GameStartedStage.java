@@ -22,8 +22,7 @@ public class GameStartedStage extends Stage {
     @Override
     public List<Flag> getFlags() {
         return Arrays.asList(
-                Flags.NO_JOIN,
-                Flags.NO_BUILD
+                Flags.NO_JOIN
         );
     }
 
