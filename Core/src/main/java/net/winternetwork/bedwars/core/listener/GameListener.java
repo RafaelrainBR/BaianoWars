@@ -16,7 +16,7 @@ public class GameListener implements Listener {
 
                         e.getPlayer().getDisplayName(),
                         Bukkit.getOnlinePlayers().size(),
-                        30
+                        15
                 )
         );
     }
@@ -29,7 +29,7 @@ public class GameListener implements Listener {
 
                         e.getPlayer().getDisplayName(),
                         Bukkit.getOnlinePlayers().size(),
-                        30
+                        15
                 )
         );
     }

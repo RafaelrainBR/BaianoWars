@@ -31,16 +31,18 @@ public class WaitingPlayerStage extends Stage {
         return new ReplaceableList(
                 Arrays.asList(
                         "&1",
-                        "&eEsperando mais <waiting> jogadores.",
-                        "&ePróxima verificação: &f<next>.",
+                        "&fMapa: &a<mapa>",
                         "&2",
-                        "&eJogadores online: <online>",
-                        "&3"
+                        "&fAguardando...",
+                        "&fJogadores: &a<online>/<max>",
+                        "&3",
+                        "&ewww.baianowars.kt"
                 ),
                 (s, player) -> s
-                        .replaceAll("<online>", getOnlinePlayers() + "")
                         .replaceAll("<waiting>", String.valueOf(GameSettings.PLAYERS_TO_START - getOnlinePlayers()))
-                        .replaceAll("<next>", String.format("%ss", getTimeLeft()))
+                        .replaceAll("<mapa>", "Void")
+                        .replaceAll("<online>", getOnlinePlayers() + "")
+                        .replaceAll("<max>", "15")
         );
     }
 

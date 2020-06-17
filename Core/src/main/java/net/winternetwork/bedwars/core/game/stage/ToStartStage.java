@@ -34,14 +34,17 @@ public class ToStartStage extends Stage {
         return new ReplaceableList(
                 Arrays.asList(
                         "&1",
-                        "&eTemos jogadores suficientes",
-                        "&eComeçando em: &f<next>.",
+                        "&fMapa: &a<mapa>",
+                        "&fComeçando em: &a<next>",
                         "&2",
-                        "&eJogadores online: <online>",
-                        "&3"
+                        "&fJogadores: &a<online>/<max>",
+                        "&3",
+                        "&ewww.baianowars.kt"
                 ),
                 (s, player) -> s
+                        .replaceAll("<mapa>", "Void")
                         .replaceAll("<online>", getOnlinePlayers() + "")
+                        .replaceAll("<max>", "15")
                         .replaceAll("<next>", String.format("%ss", getTimeLeft()))
         );
     }
@@ -83,6 +86,8 @@ public class ToStartStage extends Stage {
         broadcast("Começou!");
 
         GameMap map = MapManager.getInstance().getAll().get(0);
+
+        System.out.println(map.toString());
 
         for (int i = 0; i < getAllPlayers().size(); i++) {
             Player player = getAllPlayers().get(i);

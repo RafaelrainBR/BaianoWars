@@ -15,7 +15,7 @@ public class MapAdapter {
             int i = Integer.parseInt(id);
 
             spawnLocations[i - 1] = locationAdapter.from(
-                    section.getString("locations." + id)
+                    section.getString("locations." + i)
             );
         }
 

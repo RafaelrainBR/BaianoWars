@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LocationAdapter implements Adapter<Location, String> {
@@ -12,6 +13,7 @@ public class LocationAdapter implements Adapter<Location, String> {
     @Override
     public Location from(String s) {
         String[] split = s.split(";");
+        System.out.println("Deserialization: " + Arrays.toString(split));
         return new Location(
                 Bukkit.getWorld(split[0]),
                 Double.parseDouble(split[1]),
@@ -29,6 +31,7 @@ public class LocationAdapter implements Adapter<Location, String> {
         text.add(String.valueOf(loc.getY()));
         text.add(String.valueOf(loc.getZ()));
 
+        System.out.println("Serialization: " + text);
         return String.join(";", text);
     }
 }

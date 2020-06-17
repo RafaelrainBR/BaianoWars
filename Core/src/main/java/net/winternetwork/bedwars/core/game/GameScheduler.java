@@ -7,6 +7,7 @@ import net.winternetwork.bedwars.core.game.stage.StageManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.util.Collections;
 import java.util.List;
 
 public class GameScheduler {
@@ -18,7 +19,7 @@ public class GameScheduler {
         this.game = game;
         this.stageManager = game.getStageManager();
 
-        Bukkit.getScheduler().runTaskTimerAsynchronously(
+        Bukkit.getScheduler().runTaskTimer(
                 Core.getInstance(),
                 this::scheduleGame,
                 0,
@@ -54,6 +55,8 @@ public class GameScheduler {
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             List<String> lines = stage.getScoreboard().call(player);
+
+            Collections.reverse(lines);
 
             for (int i = lines.size(); i > 0; i--) {
                 int id = i - 1;

@@ -2,10 +2,11 @@ package net.winternetwork.bedwars.api.game.flag;
 
 import org.bukkit.event.Event;
 
-public interface Flag<T extends Event> {
 
-    Class<T> getEventClass();
+public interface Flag<E extends Event> {
 
-    void execute(T event);
+    Class<E> getEventClass();
+
+    void execute(E event);
 
 }

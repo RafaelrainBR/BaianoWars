@@ -32,12 +32,13 @@ public class GameStartedStage extends Stage {
         return new ReplaceableList(
                 Arrays.asList(
                         "&1",
-                        "&eTempo de jogo: &f<time>",
-                        "&eJogadores vivos: &2<online>",
+                        "&fTempo de jogo: &e<time>",
+                        "&fJogadores vivos: &a<online>",
                         "&2",
-                        "&e Kills: &f<kills>",
-                        "&e Camas dormidas: &c<beds>",
-                        "&3"
+                        "&f Kills: &a<kills>",
+                        "&f Camas dormidas: &c<beds>",
+                        "&3",
+                        "&ewww.baianowars.kt"
                 ),
                 (s, player) -> s
                         .replaceAll("<time>", getGame().getTimeElapsed() + "s")
