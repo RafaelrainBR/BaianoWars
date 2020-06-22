@@ -1,5 +1,6 @@
 package net.winternetwork.bedwars.core.game.generators;
 
+import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -21,4 +22,7 @@ public class Generator {
 
     @Setter
     private int time = 10;
+
+    @Setter
+    private Hologram hologram;
 }

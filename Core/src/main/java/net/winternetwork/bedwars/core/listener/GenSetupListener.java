@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class GenSetupListener implements Listener {
 
-    private final Map<String, String> setupMap = Core.getInstance().getGenBlockMap();
+    private final Map<String, String> setupMap = Core.getInstance().getGeneratorsBlockSetMap();
 
     private final GeneratorManager manager = GeneratorManager.getInstance();
 

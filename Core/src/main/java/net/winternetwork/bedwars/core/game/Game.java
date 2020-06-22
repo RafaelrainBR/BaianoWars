@@ -5,8 +5,6 @@ import net.winternetwork.bedwars.core.Core;
 import net.winternetwork.bedwars.core.game.generators.GeneratorScheduler;
 import net.winternetwork.bedwars.core.game.map.MapManager;
 import net.winternetwork.bedwars.core.game.stage.StageManager;
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.ServicePriority;
 
 public class Game {
 
@@ -41,14 +39,6 @@ public class Game {
         mapManager = MapManager.getInstance();
 
         Core.getInstance().registerGameListeners();
-
-        Bukkit.getServicesManager()
-                .register(
-                        Game.class,
-                        this,
-                        Core.getInstance(),
-                        ServicePriority.Highest
-                );
     }
 
 }

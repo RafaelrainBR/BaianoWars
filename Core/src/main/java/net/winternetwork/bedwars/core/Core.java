@@ -1,11 +1,14 @@
 package net.winternetwork.bedwars.core;
 
+import com.gmail.filoghost.holographicdisplays.api.Hologram;
+import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import lombok.Getter;
 import net.winternetwork.bedwars.api.config.YamlConfig;
 import net.winternetwork.bedwars.api.plugin.WinterPlugin;
 import net.winternetwork.bedwars.core.commands.EssentialsCommands;
 import net.winternetwork.bedwars.core.commands.GeneratorCommands;
 import net.winternetwork.bedwars.core.commands.MapSetupCommand;
+import net.winternetwork.bedwars.core.game.generators.GeneratorManager;
 import net.winternetwork.bedwars.core.game.map.MapManager;
 import net.winternetwork.bedwars.core.listener.FlagListener;
 import net.winternetwork.bedwars.core.listener.GameListener;
@@ -23,14 +26,20 @@ public class Core extends WinterPlugin {
     private YamlConfig mapsConfig;
 
     @Getter
-    private final Map<String, String> genBlockMap = new HashMap<>();
+    private final Map<String, String> generatorsBlockSetMap = new HashMap<>();
+    @Getter
+    private YamlConfig generatorsConfig;
 
     @Override
     public void onPluginStart() {
         instance = this;
 
+        HologramsAPI.getHolograms(this).forEach(Hologram::delete);
+
         setupConfig();
+
         MapManager.getInstance().loadAll(mapsConfig);
+        GeneratorManager.getInstance().loadAll(generatorsConfig);
 
         getFrame().registerCommands(
                 new EssentialsCommands(),
@@ -44,6 +53,7 @@ public class Core extends WinterPlugin {
     @Override
     public void onPluginDies() {
         MapManager.getInstance().unloadAll(mapsConfig);
+        GeneratorManager.getInstance().unloadAll(generatorsConfig);
     }
 
     private void setupConfig() {
@@ -53,6 +63,12 @@ public class Core extends WinterPlugin {
                 this,
                 getDataFolder(),
                 "maps.yml"
+        );
+
+        generatorsConfig = new YamlConfig(
+                this,
+                getDataFolder(),
+                "generators.yml"
         );
     }
 

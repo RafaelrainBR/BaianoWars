@@ -29,8 +29,6 @@ public class GameScheduler {
 
     private void scheduleGame() {
         scheduleTime();
-
-        scheduleScore();
     }
 
     private void scheduleTime() {
@@ -42,6 +40,8 @@ public class GameScheduler {
 
         stage.onSecondPassed();
         stage.operateTime();
+
+        scheduleScore();
 
         if (stage.getTimeLeft() <= 0) {
             stage.onTimeLeft();

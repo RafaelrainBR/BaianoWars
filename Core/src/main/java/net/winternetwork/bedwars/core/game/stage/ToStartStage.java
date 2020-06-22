@@ -26,7 +26,8 @@ public class ToStartStage extends Stage {
         return Arrays.asList(
                 Flags.NO_PVP,
                 Flags.NO_BREAK,
-                Flags.NO_BUILD
+                Flags.NO_BUILD,
+                Flags.NO_GENERATOR
         );
     }
 

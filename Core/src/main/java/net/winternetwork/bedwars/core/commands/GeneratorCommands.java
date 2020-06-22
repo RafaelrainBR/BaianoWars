@@ -62,7 +62,7 @@ public class GeneratorCommands {
             return;
         }
 
-        Core.getInstance().getGenBlockMap().put(execution.getPlayer().getName(), name);
+        Core.getInstance().getGeneratorsBlockSetMap().put(execution.getPlayer().getName(), name);
 
         execution.sendMessage("§eClique em um bloco.");
     }
