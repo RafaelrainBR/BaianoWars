@@ -1,6 +1,7 @@
 package net.winternetwork.bedwars.game.scheduler;
 
 import net.winternetwork.bedwars.api.module.Module;
+import net.winternetwork.bedwars.api.module.ModulePriority;
 import net.winternetwork.bedwars.game.Game;
 import net.winternetwork.bedwars.game.module.Modules;
 import org.bukkit.Bukkit;
@@ -20,8 +21,12 @@ public class GameScheduler {
     }
 
     private void schedule() {
-        for (Module module : modules.getAll()) {
-            module.getScheduler().run();
+        for (int i = 0; i < ModulePriority.values().length; i++) {
+            for (Module module : modules.getAll()) {
+                if (module.getPriority().getId() != i) continue;
+
+                module.getScheduler().run();
+            }
         }
     }
 }
