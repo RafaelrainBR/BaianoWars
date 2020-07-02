@@ -15,10 +15,15 @@ import java.util.List;
 
 public class ScoreModule extends Module {
 
-    private final StageManager stageManager = Modules.getModule(StageModule.class).getStageManager();
+    private StageManager stageManager;
 
     public ScoreModule() {
         super("Score", ModulePriority.HIGH);
+    }
+
+    @Override
+    public void init() {
+        stageManager = Modules.getModule(StageModule.class).getStageManager();
     }
 
     @Override

@@ -4,6 +4,7 @@ import lombok.Getter;
 import net.winternetwork.bedwars.api.game.stage.Stage;
 import net.winternetwork.bedwars.api.module.Module;
 import net.winternetwork.bedwars.api.module.ModulePriority;
+import net.winternetwork.bedwars.game.Game;
 import net.winternetwork.bedwars.game.module.Modules;
 import net.winternetwork.bedwars.game.module.generators.command.GeneratorCommands;
 import net.winternetwork.bedwars.game.module.generators.listener.GenSetupListener;
@@ -19,7 +20,7 @@ import java.util.Map;
 
 public class GeneratorsModule extends Module {
 
-    private final StageManager stageManager = Modules.getModule(StageModule.class).getStageManager();
+    private StageManager stageManager;
 
     @Getter
     private final Map<String, String> getSetupMap = new HashMap<>();
@@ -33,24 +34,26 @@ public class GeneratorsModule extends Module {
 
     @Override
     public void init() {
-        getLogger().info("Carregando geradores...");
+        stageManager = Modules.getModule(StageModule.class).getStageManager();
+
+        log("Carregando geradores...");
 
         manager = new GeneratorManager();
-        manager.loadAll(Core.getInstance().getGeneratorsConfig());
+        manager.loadAll(Game.getGame().getGeneratorsConfig());
 
-        getLogger().info("Registrando comandos...");
-        Core.getInstance()
+        log("Registrando comandos...");
+        Game.getGame()
                 .registerCommands(new GeneratorCommands());
 
-        getLogger().info("Registrando listeners...");
-        Core.getInstance()
+        log("Registrando listeners...");
+        Game.getGame()
                 .registerListeners(new GenSetupListener());
     }
 
     @Override
     public void disable() {
-        getLogger().info("Salvando geradores...");
-        manager.unloadAll(Core.getInstance().getGeneratorsConfig());
+        log("Salvando geradores...");
+        manager.unloadAll(Game.getGame().getGeneratorsConfig());
     }
 
     @Override

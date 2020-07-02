@@ -23,11 +23,11 @@ public class StageModule extends Module {
 
     @Override
     public void init() {
-        getLogger().info("Iniciando sistema de estágios...");
+        log("Iniciando sistema de estágios...");
         this.stageManager = new StageManager();
 
-        getLogger().info("Registrando listeners...");
-        Core.getInstance()
+        log("Registrando listeners...");
+        Game.getGame()
                 .registerListeners(new FlagListener(stageManager));
     }
 

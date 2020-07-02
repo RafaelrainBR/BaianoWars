@@ -4,7 +4,7 @@ import net.winternetwork.bedwars.api.game.flag.Flag;
 import net.winternetwork.bedwars.api.game.stage.Stage;
 import net.winternetwork.bedwars.api.score.ReplaceableList;
 import net.winternetwork.bedwars.game.module.Modules;
-import net.winternetwork.bedwars.game.module.map.MapManager;
+import net.winternetwork.bedwars.game.module.map.MapModule;
 import net.winternetwork.bedwars.game.module.map.object.GameMap;
 import net.winternetwork.bedwars.game.module.stage.StageManager;
 import net.winternetwork.bedwars.game.module.stage.StageModule;
@@ -90,7 +90,7 @@ public class ToStartStage extends Stage {
         if (!started) return;
         broadcast("Começou!");
 
-        GameMap map = MapManager.getInstance().getAll().get(0);
+        GameMap map = Modules.getModule(MapModule.class).getMapManager().getAll().get(0);
 
         System.out.println(map.toString());
 

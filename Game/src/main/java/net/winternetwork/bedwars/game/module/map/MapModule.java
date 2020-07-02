@@ -3,6 +3,7 @@ package net.winternetwork.bedwars.game.module.map;
 import lombok.Getter;
 import net.winternetwork.bedwars.api.module.Module;
 import net.winternetwork.bedwars.api.module.ModulePriority;
+import net.winternetwork.bedwars.game.Game;
 import net.winternetwork.bedwars.game.module.map.command.MapSetupCommand;
 
 public class MapModule extends Module {
@@ -18,11 +19,17 @@ public class MapModule extends Module {
     public void init() {
         mapManager = new MapManager();
 
-        getLogger().info("Carregando mapas...");
-        mapManager.loadAll(Core.getInstance().getMapsConfig());
+        log("Carregando mapas...");
+        mapManager.loadAll(Game.getGame().getMapsConfig());
 
-        getLogger().info("Registrando comandos...");
-        Core.getInstance()
+        log("Registrando comandos...");
+        Game.getGame()
                 .registerCommands(new MapSetupCommand(mapManager));
+    }
+
+    @Override
+    public void disable() {
+        log("Salvando os mapas...");
+        mapManager.unloadAll(Game.getGame().getMapsConfig());
     }
 }

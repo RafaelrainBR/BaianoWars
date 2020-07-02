@@ -1,11 +1,21 @@
 package net.winternetwork.bedwars.game;
 
-import com.gmail.filoghost.holographicdisplays.api.Hologram;
-import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import lombok.Getter;
 import net.winternetwork.bedwars.api.config.YamlConfig;
+import net.winternetwork.bedwars.api.module.Module;
+import net.winternetwork.bedwars.api.module.ModulePriority;
 import net.winternetwork.bedwars.api.plugin.WinterPlugin;
 import net.winternetwork.bedwars.game.listener.JoinListener;
+import net.winternetwork.bedwars.game.module.ModuleManager;
+import net.winternetwork.bedwars.game.module.generators.GeneratorsModule;
+import net.winternetwork.bedwars.game.module.map.MapModule;
+import net.winternetwork.bedwars.game.module.score.ScoreModule;
+import net.winternetwork.bedwars.game.module.stage.StageModule;
+import net.winternetwork.bedwars.game.scheduler.GameScheduler;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Game extends WinterPlugin {
 
@@ -23,13 +33,13 @@ public class Game extends WinterPlugin {
     @Override
     public void onPluginStart() {
         game = this;
+
         setupConfigs();
+        registerListeners(new JoinListener());
 
-        HologramsAPI.getHolograms(this).forEach(Hologram::delete);
-
-        registerCommands(new JoinListener());
+        initModules();
+        new GameScheduler();
     }
-
 
     private void setupConfigs() {
         saveDefaultConfig();
@@ -47,12 +57,34 @@ public class Game extends WinterPlugin {
         );
     }
 
+    private void initModules() {
+        ModuleManager moduleManager = ModuleManager.getInstance();
+
+        List<Module> modules = Arrays.asList(
+                new GeneratorsModule(),
+                new MapModule(),
+                new ScoreModule(),
+                new StageModule()
+        );
+
+        for (int i = 0; i < ModulePriority.values().length; i++) {
+            int id = i;
+
+            moduleManager.addAll(
+                    modules
+                            .stream()
+                            .filter(it -> it.getPriority().getId() == id)
+                            .collect(Collectors.toList())
+            );
+        }
+    }
+
     public void registerCommands(Object... objects) {
         getFrame().register(objects);
     }
 
     @Override
     public void onPluginDies() {
-
+        ModuleManager.getInstance().disableAll();
     }
 }
