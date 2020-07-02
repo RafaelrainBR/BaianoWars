@@ -31,13 +31,13 @@ public abstract class WinterPlugin extends JavaPlugin {
 
         frame.setUsageMessage("§cUso errado, utilize: §f/{usage}§c.");
         frame.setLackPermMessage("§cVocê não tem permissão para executar este comando.");
-        frame.setInGameOnlyMessage("§cEste comando só pode ser utilizado em jogo.");
+        frame.setIncorrectTargetMessage("§cEste comando só pode ser utilizado em jogo.");
         frame.setErrorMessage("§cErro ao executar este comando. Contate um administrador.");
 
         frame.registerType(OfflinePlayer.class, Bukkit::getOfflinePlayer);
     }
 
-    protected void registerListeners(Listener... listeners) {
+    public void registerListeners(Listener... listeners) {
         final PluginManager manager = Bukkit.getPluginManager();
 
         for (Listener listener : listeners) {

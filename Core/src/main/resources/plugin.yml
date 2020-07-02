@@ -1,6 +1,0 @@
-name: BedwarsCore
-version: ${project.version}
-main: net.winternetwork.bedwars.core.Core
-depend:
-  - Multiverse-Core
-  - HolographicDisplays

@@ -1,0 +1,6 @@
+name: BedwarsCore
+version: ${project.version}
+main: net.winternetwork.bedwars.game.Game
+depend:
+  - Multiverse-Core
+  - HolographicDisplays
