@@ -7,6 +7,7 @@ import net.winternetwork.bedwars.api.module.ModulePriority;
 import net.winternetwork.bedwars.api.plugin.WinterPlugin;
 import net.winternetwork.bedwars.game.listener.JoinListener;
 import net.winternetwork.bedwars.game.module.ModuleManager;
+import net.winternetwork.bedwars.game.module.build.BuildModule;
 import net.winternetwork.bedwars.game.module.generators.GeneratorsModule;
 import net.winternetwork.bedwars.game.module.map.MapModule;
 import net.winternetwork.bedwars.game.module.score.ScoreModule;
@@ -64,7 +65,8 @@ public class Game extends WinterPlugin {
                 new GeneratorsModule(),
                 new MapModule(),
                 new ScoreModule(),
-                new StageModule()
+                new StageModule(),
+                new BuildModule()
         );
 
         for (int i = 0; i < ModulePriority.values().length; i++) {

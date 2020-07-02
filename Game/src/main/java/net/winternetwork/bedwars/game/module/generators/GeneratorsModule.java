@@ -12,6 +12,7 @@ import net.winternetwork.bedwars.game.module.generators.object.Generator;
 import net.winternetwork.bedwars.game.module.stage.StageManager;
 import net.winternetwork.bedwars.game.module.stage.StageModule;
 import net.winternetwork.bedwars.game.module.stage.flag.Flags;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 
@@ -66,8 +67,10 @@ public class GeneratorsModule extends Module {
             for (Generator generator : manager.getAll()) {
                 if (generator.getTime() <= 0) {
                     Block block = generator.getBlock();
-                    block.getWorld().dropItem(
-                            block.getLocation().add(0, 0.7, 0),
+                    World world = block.getWorld();
+
+                    world.dropItemNaturally(
+                            block.getLocation().add(0, 1, 0),
                             new ItemStack(generator.getItemType())
                     );
 

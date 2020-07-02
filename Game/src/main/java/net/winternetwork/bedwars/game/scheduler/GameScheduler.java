@@ -6,6 +6,9 @@ import net.winternetwork.bedwars.game.Game;
 import net.winternetwork.bedwars.game.module.Modules;
 import org.bukkit.Bukkit;
 
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedDeque;
+
 public class GameScheduler {
 
     private final Modules modules = Modules.getInstance();
@@ -21,11 +24,13 @@ public class GameScheduler {
     }
 
     private void schedule() {
+        Queue<Module> queue = new ConcurrentLinkedDeque<>(modules.getAll());
         for (int i = 0; i < ModulePriority.values().length; i++) {
-            for (Module module : modules.getAll()) {
+            for (Module module : queue) {
                 if (module.getPriority().getId() != i) continue;
 
                 module.getScheduler().run();
+                queue.remove(module);
             }
         }
     }

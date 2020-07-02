@@ -1,5 +1,6 @@
 package net.winternetwork.bedwars.game.module.stage.model;
 
+import lombok.Getter;
 import net.winternetwork.bedwars.api.game.flag.Flag;
 import net.winternetwork.bedwars.api.game.stage.Stage;
 import net.winternetwork.bedwars.api.score.ReplaceableList;
@@ -17,6 +18,7 @@ import java.util.List;
 
 public class ToStartStage extends Stage {
 
+    @Getter(lazy = true)
     private final StageManager stageManager = Modules.getModule(StageModule.class).getStageManager();
     private boolean started = false;
 
@@ -62,7 +64,7 @@ public class ToStartStage extends Stage {
     public void onSecondPassed() {
 
         if (getTimeLeft() <= 0) {
-            stageManager.callNextStage();
+            getStageManager().callNextStage();
         }
 
         if (getTimeLeft() <= 5) {
@@ -77,12 +79,12 @@ public class ToStartStage extends Stage {
         if (getOnlinePlayers() < GameSettings.PLAYERS_TO_START) {
             broadcast("§eAinda não tem jogadores suficientes para começar.");
 
-            stageManager.callPreviousStage();
+            getStageManager().callPreviousStage();
             return;
         }
 
         started = true;
-        stageManager.callNextStage();
+        getStageManager().callNextStage();
     }
 
     @Override

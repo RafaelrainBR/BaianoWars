@@ -41,7 +41,7 @@ public class GeneratorManager {
         for (Generator value : getAll()) {
             final String prefix = "generators." + value.getName();
 
-            config.set(prefix + ".drop_material", value.getBlock().getType().name());
+            config.set(prefix + ".drop_material", value.getItemType().name());
 
             final Block block = value.getBlock();
             final String blockPrefix = prefix + ".block";

@@ -38,8 +38,6 @@ public class StageModule extends Module {
 
             final Stage stage = stageManager.getActualStage();
 
-            System.out.println(stage.getTimeLeft());
-
             stage.onSecondPassed();
             stage.operateTime();
 

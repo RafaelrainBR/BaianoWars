@@ -1,5 +1,6 @@
 package net.winternetwork.bedwars.game.module.stage.model;
 
+import lombok.Getter;
 import net.winternetwork.bedwars.api.game.flag.Flag;
 import net.winternetwork.bedwars.api.game.stage.Stage;
 import net.winternetwork.bedwars.api.score.ReplaceableList;
@@ -14,6 +15,7 @@ import java.util.List;
 
 public class WaitingPlayerStage extends Stage {
 
+    @Getter(lazy = true)
     private final StageManager stageManager = Modules.getModule(StageModule.class).getStageManager();
 
     public WaitingPlayerStage() {
@@ -75,7 +77,7 @@ public class WaitingPlayerStage extends Stage {
         final int online = getOnlinePlayers();
 
         if (online >= GameSettings.PLAYERS_TO_START)
-            stageManager.callNextStage();
+            getStageManager().callNextStage();
         else {
             setTimeLeft(getTime());
             onStageJoin();

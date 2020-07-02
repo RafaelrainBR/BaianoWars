@@ -1,6 +1,7 @@
 package net.winternetwork.bedwars.game.module.stage.flag;
 
 import net.winternetwork.bedwars.api.game.flag.Flag;
+import org.bukkit.GameMode;
 import org.bukkit.event.block.BlockBreakEvent;
 
 public class NoBreakFlag implements Flag<BlockBreakEvent> {
@@ -12,6 +13,6 @@ public class NoBreakFlag implements Flag<BlockBreakEvent> {
 
     @Override
     public void execute(BlockBreakEvent event) {
-        if (!event.getPlayer().isOp()) event.setCancelled(true);
+        if (event.getPlayer().getGameMode() != GameMode.CREATIVE) event.setCancelled(true);
     }
 }
