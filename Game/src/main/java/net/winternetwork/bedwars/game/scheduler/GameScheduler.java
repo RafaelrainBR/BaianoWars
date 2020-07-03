@@ -3,7 +3,7 @@ package net.winternetwork.bedwars.game.scheduler;
 import net.winternetwork.bedwars.api.module.Module;
 import net.winternetwork.bedwars.api.module.ModulePriority;
 import net.winternetwork.bedwars.game.Game;
-import net.winternetwork.bedwars.game.module.Modules;
+import net.winternetwork.bedwars.game.modules.Modules;
 import org.bukkit.Bukkit;
 
 import java.util.Queue;

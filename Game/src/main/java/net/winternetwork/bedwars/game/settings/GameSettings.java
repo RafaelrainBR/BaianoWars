@@ -1,9 +1,9 @@
 package net.winternetwork.bedwars.game.settings;
 
 import net.winternetwork.bedwars.api.game.stage.Stage;
-import net.winternetwork.bedwars.game.module.stage.model.GameStartedStage;
-import net.winternetwork.bedwars.game.module.stage.model.ToStartStage;
-import net.winternetwork.bedwars.game.module.stage.model.WaitingPlayerStage;
+import net.winternetwork.bedwars.game.modules.stage.model.GameStartedStage;
+import net.winternetwork.bedwars.game.modules.stage.model.ToStartStage;
+import net.winternetwork.bedwars.game.modules.stage.model.WaitingPlayerStage;
 
 public class GameSettings {
 

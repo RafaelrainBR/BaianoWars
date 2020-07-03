@@ -1,8 +1,8 @@
 package net.winternetwork.bedwars.game.listener;
 
-import net.winternetwork.bedwars.game.module.Modules;
-import net.winternetwork.bedwars.game.module.map.MapModule;
-import net.winternetwork.bedwars.game.module.map.object.GameMap;
+import net.winternetwork.bedwars.game.modules.Modules;
+import net.winternetwork.bedwars.game.modules.map.MapModule;
+import net.winternetwork.bedwars.game.modules.map.object.GameMap;
 import net.winternetwork.bedwars.game.settings.GameSettings;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;

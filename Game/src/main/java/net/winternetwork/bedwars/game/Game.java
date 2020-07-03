@@ -6,12 +6,13 @@ import net.winternetwork.bedwars.api.module.Module;
 import net.winternetwork.bedwars.api.module.ModulePriority;
 import net.winternetwork.bedwars.api.plugin.WinterPlugin;
 import net.winternetwork.bedwars.game.listener.JoinListener;
-import net.winternetwork.bedwars.game.module.ModuleManager;
-import net.winternetwork.bedwars.game.module.build.BuildModule;
-import net.winternetwork.bedwars.game.module.generators.GeneratorsModule;
-import net.winternetwork.bedwars.game.module.map.MapModule;
-import net.winternetwork.bedwars.game.module.score.ScoreModule;
-import net.winternetwork.bedwars.game.module.stage.StageModule;
+import net.winternetwork.bedwars.game.modules.ModuleManager;
+import net.winternetwork.bedwars.game.modules.build.BuildModule;
+import net.winternetwork.bedwars.game.modules.generators.GeneratorsModule;
+import net.winternetwork.bedwars.game.modules.map.MapModule;
+import net.winternetwork.bedwars.game.modules.score.ScoreModule;
+import net.winternetwork.bedwars.game.modules.shop.ShopModule;
+import net.winternetwork.bedwars.game.modules.stage.StageModule;
 import net.winternetwork.bedwars.game.scheduler.GameScheduler;
 
 import java.util.Arrays;
@@ -66,7 +67,8 @@ public class Game extends WinterPlugin {
                 new MapModule(),
                 new ScoreModule(),
                 new StageModule(),
-                new BuildModule()
+                new BuildModule(),
+                new ShopModule()
         );
 
         for (int i = 0; i < ModulePriority.values().length; i++) {
