@@ -1,17 +1,19 @@
 package net.winternetwork.bedwars.game.modules.shop.model;
 
-import net.minecraft.server.v1_8_R3.Entity;
-import net.minecraft.server.v1_8_R3.NBTTagCompound;
+import lombok.SneakyThrows;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftEntity;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftVillager;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 
 public class VillagerModel {
 
+    @SneakyThrows
     public static Villager spawnVillager(Location location) {
         World world = location.getWorld();
 
@@ -19,22 +21,29 @@ public class VillagerModel {
         villager.setCustomNameVisible(true);
         villager.setCustomName("§e§lLOJA");
 
-        setAi(((CraftVillager) villager), false);
+        setAi(villager, false);
 
         return villager;
     }
 
-    private static void setAi(CraftEntity entity, boolean enabled) {
-        Entity nmsEntity = entity.getHandle();
+    private static void setAi(Entity entity, boolean enabled) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Method handleMethod = entity.getClass().getMethod("getHandle");
+        Object nmsEntity = handleMethod.invoke(entity);
 
-        NBTTagCompound tag = nmsEntity.getNBTTag();
-        if (tag == null) {
-            tag = new NBTTagCompound();
-        }
-        nmsEntity.c(tag);
+        Method tagMethod = nmsEntity.getClass().getMethod("getNBTTag");
+        Object tag = tagMethod.invoke(nmsEntity);
 
+        if (tag == null)
+            tag = Class.forName("net.minecraft.server.v1_8_R3.NBTTagCompound").newInstance();
+
+        Method cMethod = nmsEntity.getClass().getMethod("c");
+        cMethod.invoke(nmsEntity, tag);
+
+        Method setIntMethod = tag.getClass().getMethod("setInt");
         int value = enabled ? 0 : 1;
-        tag.setInt("NoAI", value);
-        nmsEntity.f(tag);
+        setIntMethod.invoke(tag, "NoAI", value);
+
+        Method fMethod = nmsEntity.getClass().getMethod("f");
+        fMethod.invoke(nmsEntity, tag);
     }
 }
