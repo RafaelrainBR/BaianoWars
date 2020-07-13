@@ -1,8 +1,10 @@
 # Project exclude paths
+.gradle
+gradle
 .idea
-/Api/target/
-/Game/target/
-/Game/server/
-/target/
+/build/
+/Api/build/
+/Game/build/
+/server/
 *.iml
 server
