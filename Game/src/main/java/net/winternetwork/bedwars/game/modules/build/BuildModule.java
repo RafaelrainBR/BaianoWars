@@ -4,8 +4,8 @@ import com.google.common.collect.Sets;
 import lombok.Getter;
 import net.winternetwork.bedwars.api.module.Module;
 import net.winternetwork.bedwars.api.module.ModulePriority;
-import net.winternetwork.bedwars.game.Game;
 import net.winternetwork.bedwars.game.modules.build.listener.BuildListener;
+import net.winternetwork.bedwars.game.net.winternetwork.bedwars.game.Game;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 

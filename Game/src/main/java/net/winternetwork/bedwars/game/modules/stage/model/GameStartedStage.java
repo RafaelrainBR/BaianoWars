@@ -4,8 +4,8 @@ import lombok.Getter;
 import net.winternetwork.bedwars.api.game.flag.Flag;
 import net.winternetwork.bedwars.api.game.stage.Stage;
 import net.winternetwork.bedwars.api.score.ReplaceableList;
-import net.winternetwork.bedwars.game.Game;
 import net.winternetwork.bedwars.game.modules.stage.flag.Flags;
+import net.winternetwork.bedwars.game.net.winternetwork.bedwars.game.Game;
 
 import java.util.Arrays;
 import java.util.List;

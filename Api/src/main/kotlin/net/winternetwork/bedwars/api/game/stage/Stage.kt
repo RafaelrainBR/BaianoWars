@@ -17,10 +17,10 @@ abstract class Stage(
     abstract val flags: List<Flag<*>>
     abstract val scoreboard: ReplaceableList
 
-    fun onStageJoin() {}
-    fun onSecondPassed() {}
-    fun onTimeLeft() {}
-    fun onStageExit() {}
+    open fun onStageJoin() {}
+    open fun onSecondPassed() {}
+    open fun onTimeLeft() {}
+    open fun onStageExit() {}
 
     fun operateTime() {
         timeLeft -= 1
