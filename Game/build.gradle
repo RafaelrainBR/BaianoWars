@@ -1,0 +1,9 @@
+dependencies {
+    implementation project(":Api")
+    implementation 'com.github.SaiintBrisson:inventory-framework:3e3d5945b2'
+    compileOnly 'com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.2'
+}
+
+repositories {
+    maven { url = "https://hub.spigotmc.org/nexus/content/repositories/public/" }
+}
