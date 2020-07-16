@@ -6,9 +6,9 @@ interface IGameMap {
 
     val name: String
 
-    val maxPlayers: String
+    val maxPlayers: Int
 
     val lobbyLocation: Location
 
-    val locations: Array<Location>
+    val locations: ArrayList<Location>
 }

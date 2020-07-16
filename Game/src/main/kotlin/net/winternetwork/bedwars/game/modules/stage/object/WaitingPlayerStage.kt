@@ -2,18 +2,15 @@ package net.winternetwork.bedwars.game.modules.stage.`object`
 
 import net.winternetwork.bedwars.api.game.stage.Stage
 import net.winternetwork.bedwars.api.score.ReplaceableList
-import net.winternetwork.bedwars.api.util.inject
 import net.winternetwork.bedwars.game.modules.stage.StageModule
 import net.winternetwork.bedwars.game.modules.stage.flag.Flags
 import net.winternetwork.bedwars.game.settings.GameSettings
 
-class WaitingPlayersStage : Stage(
+class WaitingPlayerStage(stageModule: StageModule) : Stage(
         "Aguardando jogadores",
         20
 ) {
-    val stageModule: StageModule by inject()
-
-    val stageManager = stageModule.stageManager
+    private val stageManager = stageModule.stageManager
 
     override val flags = listOf(
             Flags.NO_PVP_FLAG,
@@ -40,5 +37,24 @@ class WaitingPlayersStage : Stage(
                 .replace("<max>", "15")
     }
 
+    override fun onStageJoin() {
+        broadcast(
+                "§eTemos %d jogador%s online.".format(
+                        onlinePlayers, if (onlinePlayers > 1) "es" else ""
+                ),
+                "§ePara o jogo começar, precisamos de mais %d.".format(
+                        GameSettings.PLAYERS_TO_START - onlinePlayers
+                )
+        )
+    }
+
+    override fun onTimeLeft() {
+        if (onlinePlayers >= GameSettings.PLAYERS_TO_START)
+            stageManager.next()
+        else {
+            timeLeft = time
+            onStageJoin()
+        }
+    }
 
 }

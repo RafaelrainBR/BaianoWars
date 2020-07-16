@@ -1,7 +1,6 @@
 package net.winternetwork.bedwars.game.modules.stage.listener
 
 import net.winternetwork.bedwars.api.game.flag.Flag
-import net.winternetwork.bedwars.api.util.inject
 import net.winternetwork.bedwars.game.modules.stage.StageModule
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -10,11 +9,9 @@ import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.player.PlayerLoginEvent
 
-class FlagListener : Listener {
+class FlagListener(stageModule: StageModule) : Listener {
 
-    val module: StageModule by inject()
-
-    val stageManager = module.stageManager
+    private val stageManager = stageModule.stageManager
 
     @EventHandler
     fun onDamage(event: EntityDamageByEntityEvent) {

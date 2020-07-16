@@ -1,5 +1,6 @@
 package net.winternetwork.bedwars.api.config
 
+import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.plugin.Plugin
 import java.io.File
@@ -63,4 +64,8 @@ class YamlConfig(
 
                 load(reader)
             }
+
+    fun section(name: String): ConfigurationSection {
+        return getConfigurationSection(name)
+    }
 }

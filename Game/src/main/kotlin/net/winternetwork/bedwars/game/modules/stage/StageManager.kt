@@ -1,17 +1,16 @@
 package net.winternetwork.bedwars.game.modules.stage
 
 import net.winternetwork.bedwars.api.game.stage.Stage
-import net.winternetwork.bedwars.game.settings.GameSettings
-
-class StageManager {
-
+class StageManager(
+        private val stages: List<Stage>
+) {
     var actualStage: Stage?
         private set
 
     private var i = 0
 
     init {
-        actualStage = GameSettings.STAGE_ARRAY[0]
+        actualStage = stages[0]
         actualStage!!.onStageJoin()
     }
 
@@ -20,12 +19,12 @@ class StageManager {
 
         stage?.onStageExit()
 
-        actualStage = GameSettings.STAGE_ARRAY[++i]
+        actualStage = stages[++i]
         actualStage?.onStageJoin()
     }
 
     fun previous() {
-        actualStage = GameSettings.STAGE_ARRAY[--i]
+        actualStage = stages[--i]
         actualStage?.onStageJoin()
     }
 }

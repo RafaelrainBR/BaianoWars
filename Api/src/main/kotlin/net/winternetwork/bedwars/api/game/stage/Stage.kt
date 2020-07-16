@@ -11,7 +11,7 @@ abstract class Stage(
 ) {
 
     var timeLeft = time
-        private set
+        protected set
 
 
     abstract val flags: List<Flag<*>>
