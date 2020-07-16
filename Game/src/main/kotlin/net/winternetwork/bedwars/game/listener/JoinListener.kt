@@ -21,6 +21,8 @@ class JoinListener : Listener {
                         GameSettings.MAX_PLAYERS
                 )
 
-        e.player.teleport(mapModule.mapManager.all()[0].lobbyLocation)
+        if (GameSettings.canStart) {
+            e.player.teleport(mapModule.mapManager.all()[0].lobbyLocation)
+        }
     }
 }

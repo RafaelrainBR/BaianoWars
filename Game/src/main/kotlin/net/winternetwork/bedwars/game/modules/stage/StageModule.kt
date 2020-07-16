@@ -7,10 +7,12 @@ import net.winternetwork.bedwars.game.modules.stage.`object`.GameStartedStage
 import net.winternetwork.bedwars.game.modules.stage.`object`.ToStartStage
 import net.winternetwork.bedwars.game.modules.stage.`object`.WaitingPlayerStage
 import net.winternetwork.bedwars.game.modules.stage.listener.FlagListener
+import net.winternetwork.bedwars.game.settings.GameSettings
 
 class StageModule(mapModule: MapModule) : Module("Stages") {
 
-    val stageManager: StageManager
+    lateinit var stageManager: StageManager
+        private set
 
     private val stages = listOf(
             WaitingPlayerStage(this),
@@ -19,17 +21,19 @@ class StageModule(mapModule: MapModule) : Module("Stages") {
     )
 
     init {
-        log("Carregando estágios...")
-        stageManager = StageManager(stages)
+        if (GameSettings.canStart) {
+            log("Carregando estágios...")
+            stageManager = StageManager(stages)
 
-        log("Registrando listeners...")
-        game.listeners(FlagListener(this))
+            log("Registrando listeners...")
+            game.listeners(FlagListener(this))
+        }
     }
 
     override fun onSecPassed() {
-        ++game.timeElapsed
+        if (!GameSettings.canStart) return
 
-        stageManager.actualStage?.run {
+        stageManager.actualStage.run {
             onSecondPassed()
             operateTime()
 

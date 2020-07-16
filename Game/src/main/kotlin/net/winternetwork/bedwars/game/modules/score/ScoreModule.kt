@@ -3,23 +3,29 @@ package net.winternetwork.bedwars.game.modules.score
 import net.winternetwork.bedwars.api.module.Module
 import net.winternetwork.bedwars.api.score.Score
 import net.winternetwork.bedwars.game.game
-import net.winternetwork.bedwars.game.modules.score.listener.ScoreListener
 import net.winternetwork.bedwars.game.modules.stage.StageModule
+import net.winternetwork.bedwars.game.settings.GameSettings
 import org.bukkit.Bukkit
+import org.bukkit.event.EventHandler
+import org.bukkit.event.EventPriority
+import org.bukkit.event.Listener
+import org.bukkit.event.player.PlayerJoinEvent
 
 class ScoreModule(stageModule: StageModule) : Module("Score") {
 
-    val stageManager = stageModule.stageManager
+    private val stageManager = stageModule.stageManager
 
     val scoreMap = mutableMapOf<String, Score>()
 
     override fun init() {
         log("registrando listeners...")
-        game.listeners(ScoreListener(scoreMap))
+        game.listeners(listener)
     }
 
     override fun onSecPassed() {
-        val stage = stageManager.actualStage ?: return
+        if (!GameSettings.canStart) return
+
+        val stage = stageManager.actualStage
 
         for (entry in scoreMap) {
             val player = Bukkit.getPlayer(entry.key)
@@ -40,5 +46,15 @@ class ScoreModule(stageModule: StageModule) : Module("Score") {
             score.show(player)
         }
 
+    }
+
+    private val listener = object : Listener {
+        @EventHandler(
+                priority = EventPriority.HIGHEST,
+                ignoreCancelled = true
+        )
+        fun onJoin(e: PlayerJoinEvent) {
+            scoreMap[e.player.name] = Score("§e§lBAIANO WARS")
+        }
     }
 }

@@ -24,7 +24,7 @@ class GameStartedStage : Stage("Started", 60) {
             )
     ) { s, player ->
         s
-                .replace("<time>", "${game.timeElapsed}")
+                .replace("<time>", "${++game.timeElapsed}")
                 .replace("<online>", "$onlinePlayers")
                 .replace("<kills>", "${0}")
                 .replace("<beds>", "${0}")

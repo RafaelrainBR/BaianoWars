@@ -22,7 +22,6 @@ class GameScheduler {
 
         while (!queue.isEmpty()) {
             val module = queue.poll()
-
             module.onSecPassed()
         }
     }

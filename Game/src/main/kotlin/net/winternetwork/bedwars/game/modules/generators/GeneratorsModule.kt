@@ -7,6 +7,7 @@ import net.winternetwork.bedwars.game.modules.generators.command.GeneratorComman
 import net.winternetwork.bedwars.game.modules.generators.manager.GeneratorManager
 import net.winternetwork.bedwars.game.modules.stage.StageModule
 import net.winternetwork.bedwars.game.modules.stage.flag.Flags
+import net.winternetwork.bedwars.game.settings.GameSettings
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEvent
@@ -52,7 +53,9 @@ class GeneratorsModule(
     }
 
     override fun onSecPassed() {
-        val stage = stageManager.actualStage!!
+        if (!GameSettings.canStart) return
+
+        val stage = stageManager.actualStage
         if (stage.flags.contains(Flags.NO_GENERATOR_FLAG)) return
 
         generatorManager.all().forEach {
@@ -71,7 +74,7 @@ class GeneratorsModule(
         }
     }
 
-    val listener = object : Listener {
+    private val listener = object : Listener {
         @EventHandler
         fun onInteract(e: PlayerInteractEvent) {
             if (!setupMap.contains(e.player.name)) return
