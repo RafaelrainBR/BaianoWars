@@ -1,5 +1,7 @@
 package net.winternetwork.bedwars.game.listener
 
+import net.winternetwork.bedwars.api.util.inject
+import net.winternetwork.bedwars.game.modules.maps.MapModule
 import net.winternetwork.bedwars.game.settings.GameSettings
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
@@ -8,7 +10,7 @@ import org.bukkit.event.player.PlayerJoinEvent
 
 class JoinListener : Listener {
 
-    // TODO: botar import do MapModule
+    private val mapModule: MapModule by inject()
 
     @EventHandler
     fun onJoin(e: PlayerJoinEvent) {
@@ -19,6 +21,6 @@ class JoinListener : Listener {
                         GameSettings.MAX_PLAYERS
                 )
 
-        // TODO: Botar pra teleportar pro lobby do mapa
+        e.player.teleport(mapModule.mapManager.all()[0].lobbyLocation)
     }
 }

@@ -3,13 +3,10 @@ package net.winternetwork.bedwars.game.scheduler
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import net.winternetwork.bedwars.api.module.Module
+import net.winternetwork.bedwars.game.modules
 import java.util.concurrent.ConcurrentLinkedQueue
 
-object GameScheduler {
-
-    // TODO: pegar todos os modulos
-    val modules = listOf<Module>()
+class GameScheduler {
 
     init {
         GlobalScope.launch {
