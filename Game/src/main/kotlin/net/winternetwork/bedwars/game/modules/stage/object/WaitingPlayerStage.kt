@@ -50,7 +50,7 @@ class WaitingPlayerStage(stageModule: StageModule) : Stage(
 
     override fun onTimeLeft() {
         if (onlinePlayers >= GameSettings.PLAYERS_TO_START)
-            stageManager.next()
+            stageManager!!.next()
         else {
             timeLeft = time
             onStageJoin()

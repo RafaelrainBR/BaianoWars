@@ -19,13 +19,13 @@ class ScoreModule(stageModule: StageModule) : Module("Score") {
 
     override fun init() {
         log("registrando listeners...")
-        game.listeners(listener)
+        game.listeners(ModuleListener())
     }
 
     override fun onSecPassed() {
         if (!GameSettings.canStart) return
 
-        val stage = stageManager.actualStage
+        val stage = stageManager!!.actualStage
 
         for (entry in scoreMap) {
             val player = Bukkit.getPlayer(entry.key)
@@ -48,7 +48,7 @@ class ScoreModule(stageModule: StageModule) : Module("Score") {
 
     }
 
-    private val listener = object : Listener {
+    private inner class ModuleListener : Listener {
         @EventHandler(
                 priority = EventPriority.HIGHEST,
                 ignoreCancelled = true

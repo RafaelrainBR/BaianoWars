@@ -66,6 +66,6 @@ class YamlConfig(
             }
 
     fun section(name: String): ConfigurationSection {
-        return getConfigurationSection(name)
+        return getConfigurationSection(name) ?: createSection(name)
     }
 }

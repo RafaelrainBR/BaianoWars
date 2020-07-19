@@ -11,7 +11,7 @@ import net.winternetwork.bedwars.game.settings.GameSettings
 
 class StageModule(mapModule: MapModule) : Module("Stages") {
 
-    lateinit var stageManager: StageManager
+    var stageManager: StageManager? = null
         private set
 
     private val stages = listOf(
@@ -20,7 +20,7 @@ class StageModule(mapModule: MapModule) : Module("Stages") {
             GameStartedStage()
     )
 
-    init {
+    override fun init() {
         if (GameSettings.canStart) {
             log("Carregando estágios...")
             stageManager = StageManager(stages)
@@ -33,7 +33,7 @@ class StageModule(mapModule: MapModule) : Module("Stages") {
     override fun onSecPassed() {
         if (!GameSettings.canStart) return
 
-        stageManager.actualStage.run {
+        stageManager?.actualStage?.run {
             onSecondPassed()
             operateTime()
 

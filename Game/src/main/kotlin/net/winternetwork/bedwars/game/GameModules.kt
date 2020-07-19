@@ -7,37 +7,39 @@ import net.winternetwork.bedwars.game.modules.maps.MapModule
 import net.winternetwork.bedwars.game.modules.score.ScoreModule
 import net.winternetwork.bedwars.game.modules.shop.ShopModule
 import net.winternetwork.bedwars.game.modules.stage.StageModule
+import org.bukkit.Bukkit
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
+lateinit var game: Game
+
+val moduleList = mutableListOf<Module>()
+
 fun initModules() = startKoin {
     printLogger()
-    modules(
-            module {
-                single { MapModule().doInit() }
-                factory { StageModule(get()).doInit() }
-                factory { ScoreModule(get()).doInit() }
-                factory { GeneratorsModule(get()).doInit() }
-                single { BuildModule().doInit() }
-                single { ShopModule().doInit() }
-            }
-    )
+
+    val modules = module(createdAtStart = true) {
+        single { MapModule().doInit() }
+        single { StageModule(get()).doInit() }
+        single { ScoreModule(get()).doInit() }
+        single { GeneratorsModule(get()).doInit() }
+        single { BuildModule().doInit() }
+        single { ShopModule().doInit() }
+    }
+    modules(modules)
 }
 
 fun disableModules() {
-    modules.forEach {
+    moduleList.forEach {
         it.disable()
     }
 }
 
-lateinit var game: Game
+private fun <T : Module> T.doInit() = apply {
+    moduleList.add(this)
 
-val modules = mutableListOf<Module>()
-
-private fun Module.doInit() = apply {
-    modules.add(this)
-    println(
-            "[%s] Iniciando modulo %s".format("Modulos", name)
+    Bukkit.getConsoleSender().sendMessage(
+            "§6§l[%s] §fIniciando modulo §e§l%s".format("Modulos", name)
     )
     init()
 }

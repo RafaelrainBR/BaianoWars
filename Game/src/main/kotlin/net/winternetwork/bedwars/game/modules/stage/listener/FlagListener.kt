@@ -15,35 +15,31 @@ class FlagListener(stageModule: StageModule) : Listener {
 
     @EventHandler
     fun onDamage(event: EntityDamageByEntityEvent) {
-        val stage = stageManager.actualStage
+        val stage = stageManager?.actualStage ?: return
 
         val flags = stage.flags
-        if (flags != null) {
-            for (flag in flags) {
-                if (flag.eventClass != event.javaClass) continue
+        for (flag in flags) {
+            if (flag.eventClass != event.javaClass) continue
 
-                (flag as Flag<EntityDamageByEntityEvent>).execute(event)
-            }
+            (flag as Flag<EntityDamageByEntityEvent>).execute(event)
         }
     }
 
     @EventHandler
     fun onJoin(event: PlayerLoginEvent) {
-        val stage = stageManager.actualStage
+        val stage = stageManager?.actualStage ?: return
 
-        val flags = stage?.flags
-        if (flags != null) {
-            for (flag in flags) {
-                if (flag.eventClass != event.javaClass) continue
+        val flags = stage.flags
+        for (flag in flags) {
+            if (flag.eventClass != event.javaClass) continue
 
-                (flag as Flag<PlayerLoginEvent>).execute(event)
-            }
+            (flag as Flag<PlayerLoginEvent>).execute(event)
         }
     }
 
     @EventHandler
     fun onPlace(event: BlockPlaceEvent) {
-        val stage = stageManager.actualStage
+        val stage = stageManager?.actualStage ?: return
 
         val flags = stage.flags
         for (flag in flags) {
@@ -55,7 +51,7 @@ class FlagListener(stageModule: StageModule) : Listener {
 
     @EventHandler
     fun onBreak(event: BlockBreakEvent) {
-        val stage = stageManager.actualStage
+        val stage = stageManager?.actualStage ?: return
 
         val flags = stage.flags
         for (flag in flags) {

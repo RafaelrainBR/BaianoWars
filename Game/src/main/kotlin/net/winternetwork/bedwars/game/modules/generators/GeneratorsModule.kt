@@ -30,7 +30,6 @@ class GeneratorsModule(
         )
     }
 
-
     override fun init() {
         log("Carregando geradores...")
         generatorManager.loadAll(config)
@@ -44,7 +43,7 @@ class GeneratorsModule(
         )
 
         log("Registrando listeners...")
-        game.listeners(listener)
+        game.listeners(ModuleListener())
     }
 
     override fun disable() {
@@ -55,7 +54,7 @@ class GeneratorsModule(
     override fun onSecPassed() {
         if (!GameSettings.canStart) return
 
-        val stage = stageManager.actualStage
+        val stage = stageManager!!.actualStage
         if (stage.flags.contains(Flags.NO_GENERATOR_FLAG)) return
 
         generatorManager.all().forEach {
@@ -74,7 +73,7 @@ class GeneratorsModule(
         }
     }
 
-    private val listener = object : Listener {
+    private inner class ModuleListener : Listener {
         @EventHandler
         fun onInteract(e: PlayerInteractEvent) {
             if (!setupMap.contains(e.player.name)) return

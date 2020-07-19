@@ -19,7 +19,7 @@ class BuildModule : Module("Build") {
 
     override fun init() {
         log("Registrando listeners...")
-        game.listeners(listener)
+        game.listeners(BuildListener())
     }
 
     override fun disable() {
@@ -35,7 +35,8 @@ class BuildModule : Module("Build") {
         }
     }
 
-    val listener = object : Listener {
+    private inner class BuildListener : Listener {
+
         @EventHandler(
                 priority = EventPriority.HIGHEST,
                 ignoreCancelled = true

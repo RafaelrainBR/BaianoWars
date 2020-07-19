@@ -46,7 +46,7 @@ class ToStartStage(
     override fun onSecondPassed() {
         when {
             timeLeft <= 0 -> {
-                stageManager.next()
+                stageManager!!.next()
                 return
             }
             timeLeft <= 5 -> broadcast("§eComeçando o jogo em ${timeLeft}s")
@@ -58,12 +58,12 @@ class ToStartStage(
             broadcast(
                     "§eAinda não tem jogadores suficientes para começar."
             )
-            stageManager.previous()
+            stageManager!!.previous()
             return
         }
 
         started = true
-        stageManager.next()
+        stageManager!!.next()
     }
 
     override fun onStageExit() {

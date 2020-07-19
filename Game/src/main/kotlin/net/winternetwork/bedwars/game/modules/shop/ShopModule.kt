@@ -10,15 +10,17 @@ import org.bukkit.entity.Entity
 
 class ShopModule : Module("Shop") {
 
-    lateinit var view: MenuView
-
     val controller = ShopController()
 
-    override fun init() {
+    val view: MenuView by lazy {
         log("Abrindo hook ao inventory-framework")
-        view = MenuView(game)
-        InventoryFrame(game).registerListener()
+        MenuView(game).apply {
+            InventoryFrame(game).registerListener()
+        }
+    }
 
+    override fun init() {
+        view
         log("Registrando comandos...")
         game.commands(ShopCommands())
         log("Registrando listeners...")
