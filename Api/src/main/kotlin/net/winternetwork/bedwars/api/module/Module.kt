@@ -1,5 +1,6 @@
 package net.winternetwork.bedwars.api.module
 
+import net.winternetwork.bedwars.api.module.manager.Manager
 import java.io.File
 
 abstract class Module(val name: String) {
@@ -9,6 +10,8 @@ abstract class Module(val name: String) {
             if (!exists()) mkdir()
         }
     }
+
+    open val manager: Manager<*, *>? = null
 
     open fun init() {}
     open fun disable() {}

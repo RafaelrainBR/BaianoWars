@@ -13,7 +13,6 @@ abstract class Stage(
     var timeLeft = time
         protected set
 
-
     abstract val flags: List<Flag<*>>
     abstract val scoreboard: ReplaceableList
 

@@ -1,8 +1,8 @@
 package net.winternetwork.bedwars.game.listener
 
 import net.winternetwork.bedwars.api.util.inject
-import net.winternetwork.bedwars.game.modules.maps.MapModule
 import net.winternetwork.bedwars.game.settings.GameSettings
+import net.winternetwork.bedwars.modules.maps.MapModule
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -22,7 +22,7 @@ class JoinListener : Listener {
                 )
 
         if (GameSettings.canStart) {
-            e.player.teleport(mapModule.mapManager.all()[0].lobbyLocation)
+            e.player.teleport(mapModule.manager.first.lobbyLocation)
         }
     }
 }

@@ -18,7 +18,6 @@ class Game : ServerPlugin() {
         runBlocking {
             initModules()
             GameScheduler()
-
         }
     }
 

@@ -7,7 +7,7 @@ import org.bukkit.scoreboard.DisplaySlot
 import org.bukkit.scoreboard.Objective
 import java.util.*
 
-class Score(val title: String) {
+class Score(private val title: String) {
 
     private val lines = Collections.synchronizedList(ArrayList<TableLine>())
 
@@ -28,7 +28,7 @@ class Score(val title: String) {
         lines.add(TableLine(line, text))
     }
 
-    fun updateLines(player: Player) {
+    private fun updateLines(player: Player) {
         val obj = getObjective(player)
 
         for (i in lines.size..0) {
