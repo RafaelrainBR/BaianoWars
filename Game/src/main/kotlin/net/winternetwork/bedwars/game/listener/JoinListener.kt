@@ -14,7 +14,7 @@ class JoinListener : Listener {
 
     @EventHandler
     fun onJoin(e: PlayerJoinEvent) {
-        e.joinMessage = "§e%sentrou. §f(%d/%d)"
+        e.joinMessage = "§e%s entrou. §f(%d/%d)"
                 .format(
                         e.player.displayName,
                         Bukkit.getOnlinePlayers().size,

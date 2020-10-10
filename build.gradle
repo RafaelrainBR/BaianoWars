@@ -6,6 +6,8 @@ plugins {
 group = "net.winternetwork"
 version = "1.1-SNAPSHOT"
 
+def serverFolder = new File(project.projectDir, "server")
+
 subprojects {
     apply plugin: 'org.jetbrains.kotlin.jvm'
     apply plugin: 'com.github.johnrengelman.shadow'
@@ -17,6 +19,7 @@ subprojects {
         maven { url("https://jitpack.io") }
         maven { url("https://repo.codemc.io/repository/maven-public/") }
     }
+
     dependencies {
         compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
 
@@ -34,7 +37,9 @@ subprojects {
     }
 
     shadowJar {
-        def folder = new File(rootDir, "server/plugins")
-        destinationDirectory.set(folder)
+        if(!serverFolder.exists()){
+            serverFolder.mkDir()
+        }
+        destinationDirectory.set(new File(serverFolder, "plugins"))
     }
 }
