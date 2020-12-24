@@ -2,7 +2,7 @@ package net.winternetwork.bedwars.modules.teams.manager
 
 import net.winternetwork.bedwars.api.config.YamlConfig
 import net.winternetwork.bedwars.api.module.manager.Manager
-import net.winternetwork.bedwars.game.modules.teams.model.Team
+import net.winternetwork.bedwars.modules.teams.model.Team
 
 class TeamManager(config: YamlConfig) : Manager<String, Team>(config) {
 

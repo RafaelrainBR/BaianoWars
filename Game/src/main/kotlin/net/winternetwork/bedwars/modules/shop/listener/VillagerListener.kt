@@ -1,6 +1,8 @@
 package net.winternetwork.bedwars.modules.shop.listener
 
 import net.winternetwork.bedwars.api.util.inject
+import net.winternetwork.bedwars.modules.shop.ShopModule
+import net.winternetwork.bedwars.modules.shop.model.menu.MenuView
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -12,8 +14,8 @@ import org.bukkit.event.player.PlayerInteractEntityEvent
 
 class VillagerListener : Listener {
 
-    private val module: _root_ide_package_.net.winternetwork.bedwars.modules.shop.ShopModule by inject()
-    private val view: _root_ide_package_.net.winternetwork.bedwars.modules.shop.model.menu.MenuView by lazy { module.view }
+    private val module: ShopModule by inject()
+    private val view: MenuView by lazy { module.view }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     fun openEvent(e: InventoryOpenEvent) {

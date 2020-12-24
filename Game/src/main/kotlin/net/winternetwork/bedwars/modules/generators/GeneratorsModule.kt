@@ -15,7 +15,7 @@ import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
 
 class GeneratorsModule(
-        stageModule: StageModule
+    stageModule: StageModule
 ) : Module("Geradores") {
 
     private val stageManager = stageModule.stageManager
@@ -24,9 +24,9 @@ class GeneratorsModule(
 
     private val config: YamlConfig by lazy {
         YamlConfig(
-                game,
-                dataFolder,
-                "generators.yml"
+            game,
+            dataFolder,
+            "generators.yml"
         )
     }
 
@@ -35,10 +35,10 @@ class GeneratorsModule(
     override fun init() {
         log("Registrando comandos...")
         game.commands(
-                GeneratorCommands(
-                        manager,
-                        setupMap
-                )
+            GeneratorCommands(
+                manager,
+                setupMap
+            )
         )
 
         log("Registrando listeners...")
@@ -56,10 +56,10 @@ class GeneratorsModule(
                 val world = it.block.world
 
                 world.dropItem(
-                        it.block.location.add(0.0, 1.0, 0.0),
-                        ItemStack(it.type).applyMeta { item ->
-                            item.displayName = it.name
-                        }
+                    it.block.location.add(0.0, 1.0, 0.0),
+                    ItemStack(it.type).applyMeta { item ->
+                        item.displayName = it.name
+                    }
                 )
 
                 it.time = 10

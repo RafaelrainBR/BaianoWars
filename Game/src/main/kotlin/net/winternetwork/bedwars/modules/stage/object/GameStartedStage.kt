@@ -3,36 +3,37 @@ package net.winternetwork.bedwars.modules.stage.`object`
 import net.winternetwork.bedwars.api.game.stage.Stage
 import net.winternetwork.bedwars.api.score.ReplaceableList
 import net.winternetwork.bedwars.game.game
+import net.winternetwork.bedwars.modules.stage.flag.Flags
 
 class GameStartedStage : Stage("Started", 60) {
 
     override val flags = listOf(
-            _root_ide_package_.net.winternetwork.bedwars.modules.stage.flag.Flags.NO_JOIN_FLAG
+        Flags.NO_JOIN_FLAG
     )
 
     override val scoreboard = ReplaceableList(
-            listOf(
-                    "&1",
-                    "&fTempo de jogo: &e<time>",
-                    "&fJogadores vivos: &a<online>",
-                    "&2",
-                    "&f Kills: &a<kills>",
-                    "&f Camas dormidas: &c<beds>",
-                    "&3",
-                    "&ewww.baianowars.kt"
-            )
-    ) { s, player ->
-        s
-                .replace("<time>", "${++game.timeElapsed}")
-                .replace("<online>", "$onlinePlayers")
-                .replace("<kills>", "${0}")
-                .replace("<beds>", "${0}")
-
+        listOf(
+            "&1",
+            "&fTempo de jogo: &e<time>",
+            "&fJogadores vivos: &a<online>",
+            "&2",
+            "&f Kills: &a<kills>",
+            "&f Camas dormidas: &c<beds>",
+            "&3",
+            "&ewww.baianowars.kt"
+        )
+    ) {
+        mapOf(
+            "<time>" to "${++game.timeElapsed}",
+            "<online>" to "$onlinePlayers",
+            "<kills>" to "${0}",
+            "<beds>" to "${0}"
+        )
     }
 
     override fun onTimeLeft() {
         broadcast(
-                "§eTemos %d jogadores vivos.".format(onlinePlayers)
+            "§eTemos %d jogadores vivos.".format(onlinePlayers)
         )
         timeLeft = time
     }

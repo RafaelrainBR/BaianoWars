@@ -8,27 +8,27 @@ import org.bukkit.plugin.Plugin
 import java.util.function.Supplier
 
 class MenuView(
-        owner: Plugin
-) : PaginatedView<_root_ide_package_.net.winternetwork.bedwars.modules.shop.model.menu.ShopItem>(
-        owner,
-        "Menu de compra",
-        arrayOf(
-                "OOOOOOOOO",
-                "OXXXXXXXO",
-                "OOOOOOOOO",
-                "OOO<O>OOO"
-        ),
-        Supplier {
-            listOf(
-                    _root_ide_package_.net.winternetwork.bedwars.modules.shop.model.menu.ShopItem(
-                            "§fBlocos de lã",
-                            ItemBuilder(Material.WOOL, 16, 3).build(),
-                            16,
-                            Material.IRON_INGOT,
-                            4
-                    )
+    owner: Plugin
+) : PaginatedView<ShopItem>(
+    owner,
+    "Menu de compra",
+    arrayOf(
+        "OOOOOOOOO",
+        "OXXXXXXXO",
+        "OOOOOOOOO",
+        "OOO<O>OOO"
+    ),
+    Supplier {
+        listOf(
+            ShopItem(
+                "§fBlocos de lã",
+                ItemBuilder(Material.WOOL, 16, 3).build(),
+                16,
+                Material.IRON_INGOT,
+                4
             )
-        }
+        )
+    }
 ) {
     init {
         setItemProcessor { player, item, event ->
@@ -51,7 +51,7 @@ class MenuView(
                 player.run {
                     closeInventory()
                     sendMessage(
-                            "§2Você comprou §f%s §2com sucesso!".format(item.name)
+                        "§2Você comprou §f%s §2com sucesso!".format(item.name)
                     )
                 }
             }

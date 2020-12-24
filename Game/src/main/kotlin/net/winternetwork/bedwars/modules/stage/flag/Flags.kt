@@ -40,8 +40,8 @@ object Flags {
 
         override fun execute(e: PlayerLoginEvent) {
             e.disallow(
-                    PlayerLoginEvent.Result.KICK_WHITELIST,
-                    "§cO jogo já está rolando. Aguarde ele acabar."
+                PlayerLoginEvent.Result.KICK_WHITELIST,
+                "§cO jogo já está rolando. Aguarde ele acabar."
             )
         }
     }

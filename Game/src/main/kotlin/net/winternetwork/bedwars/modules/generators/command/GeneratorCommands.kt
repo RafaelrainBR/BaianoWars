@@ -10,30 +10,30 @@ import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
 class GeneratorCommands(
-        private val generatorManager: GeneratorManager,
-        private val setupMap: MutableMap<String, String>
+    private val generatorManager: GeneratorManager,
+    private val setupMap: MutableMap<String, String>
 ) {
 
     @Command(
-            name = "generators",
-            permission = "generators.use",
-            target = CommandTarget.PLAYER
+        name = "generators",
+        permission = "generators.use",
+        target = CommandTarget.PLAYER
     )
     fun help(ctx: Context<CommandSender>) {
         ctx.sendMessage(
-                arrayOf(
-                        "",
-                        "§e§l/generators §fcreate §e<nome> §6- segurando item na mão.",
-                        "§e§l/generators §fsetblock §e<nome> §6- e depois clica no bloco",
-                        ""
-                )
+            arrayOf(
+                "",
+                "§e§l/generators §fcreate §e<nome> §6- segurando item na mão.",
+                "§e§l/generators §fsetblock §e<nome> §6- e depois clica no bloco",
+                ""
+            )
         )
     }
 
     @Command(
-            name = "generators.create",
-            permission = "generators.use",
-            usage = "generators create <nome>"
+        name = "generators.create",
+        permission = "generators.use",
+        usage = "generators create <nome>"
     )
     fun create(ctx: Context<Player>, name: String) {
         val hand = ctx.sender.itemInHand
@@ -49,9 +49,9 @@ class GeneratorCommands(
     }
 
     @Command(
-            name = "generators.setblock",
-            permission = "generators.use",
-            usage = "generators setblock <nome>"
+        name = "generators.setblock",
+        permission = "generators.use",
+        usage = "generators setblock <nome>"
     )
     fun setBlock(ctx: Context<Player>, name: String) {
         val generator = generatorManager[name]

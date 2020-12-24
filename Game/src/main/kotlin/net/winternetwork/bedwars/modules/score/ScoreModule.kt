@@ -4,13 +4,14 @@ import net.winternetwork.bedwars.api.module.Module
 import net.winternetwork.bedwars.api.score.Score
 import net.winternetwork.bedwars.game.game
 import net.winternetwork.bedwars.game.settings.GameSettings
+import net.winternetwork.bedwars.modules.stage.StageModule
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 
-class ScoreModule(stageModule: _root_ide_package_.net.winternetwork.bedwars.modules.stage.StageModule) : Module("Score") {
+class ScoreModule(stageModule: StageModule) : Module("Score") {
 
     private val stageManager = stageModule.stageManager
 
@@ -49,8 +50,8 @@ class ScoreModule(stageModule: _root_ide_package_.net.winternetwork.bedwars.modu
 
     private inner class ModuleListener : Listener {
         @EventHandler(
-                priority = EventPriority.HIGHEST,
-                ignoreCancelled = true
+            priority = EventPriority.HIGHEST,
+            ignoreCancelled = true
         )
         fun onJoin(e: PlayerJoinEvent) {
             scoreMap[e.player.name] = Score("§e§lBAIANO WARS")

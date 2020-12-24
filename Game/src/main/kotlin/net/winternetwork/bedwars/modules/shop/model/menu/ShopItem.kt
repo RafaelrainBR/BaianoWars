@@ -15,17 +15,17 @@ data class ShopItem(
         val cost: Int
 ) : PaginatedItem {
 
-    override fun toItemStack(viewer: Player, holder: PaginatedViewHolder): ItemStack {
-        return ItemBuilder(stack)
-                .name(name)
-                .lore(
-                        "",
-                        "§eMaterial: §f" + material.name.toLowerCase(),
-                        "§eCusto: §f$cost",
-                        ""
-                )
-                .amount(amount)
-                .build()
-    }
+        override fun toItemStack(viewer: Player, holder: PaginatedViewHolder): ItemStack {
+                return ItemBuilder(stack)
+                        .name(name)
+                        .lore(
+                                "",
+                                "§eMaterial: §f" + material.name.toLowerCase(),
+                                "§eCusto: §f$cost",
+                                ""
+                        )
+                        .amount(amount)
+                        .build()
+        }
 
 }

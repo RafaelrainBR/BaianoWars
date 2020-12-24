@@ -38,8 +38,8 @@ class BuildModule : Module("Build") {
     private inner class BuildListener : Listener {
 
         @EventHandler(
-                priority = EventPriority.HIGHEST,
-                ignoreCancelled = true
+            priority = EventPriority.HIGHEST,
+            ignoreCancelled = true
         )
         fun onBreak(e: BlockBreakEvent) {
             if (e.player.gameMode == GameMode.CREATIVE) return
@@ -49,8 +49,8 @@ class BuildModule : Module("Build") {
         }
 
         @EventHandler(
-                priority = EventPriority.HIGHEST,
-                ignoreCancelled = true
+            priority = EventPriority.HIGHEST,
+            ignoreCancelled = true
         )
         fun onPlace(e: BlockPlaceEvent) {
             if (e.player.gameMode == GameMode.CREATIVE) return

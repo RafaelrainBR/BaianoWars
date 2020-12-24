@@ -3,25 +3,30 @@ package net.winternetwork.bedwars.modules.stage
 import net.winternetwork.bedwars.api.module.Module
 import net.winternetwork.bedwars.game.game
 import net.winternetwork.bedwars.game.settings.GameSettings
+import net.winternetwork.bedwars.modules.maps.MapModule
+import net.winternetwork.bedwars.modules.stage.`object`.GameStartedStage
+import net.winternetwork.bedwars.modules.stage.`object`.ToStartStage
+import net.winternetwork.bedwars.modules.stage.`object`.WaitingPlayerStage
+import net.winternetwork.bedwars.modules.stage.listener.FlagListener
 
-class StageModule(mapModule: _root_ide_package_.net.winternetwork.bedwars.modules.maps.MapModule) : Module("Stages") {
+class StageModule(mapModule: MapModule) : Module("Stages") {
 
-    var stageManager: _root_ide_package_.net.winternetwork.bedwars.modules.stage.StageManager? = null
+    var stageManager: StageManager? = null
         private set
 
     private val stages = listOf(
-            _root_ide_package_.net.winternetwork.bedwars.modules.stage.`object`.WaitingPlayerStage(this),
-            _root_ide_package_.net.winternetwork.bedwars.modules.stage.`object`.ToStartStage(this, mapModule),
-            _root_ide_package_.net.winternetwork.bedwars.modules.stage.`object`.GameStartedStage()
+        WaitingPlayerStage(this),
+        ToStartStage(this, mapModule),
+        GameStartedStage()
     )
 
     override fun init() {
         if (GameSettings.canStart) {
             log("Carregando estágios...")
-            stageManager = _root_ide_package_.net.winternetwork.bedwars.modules.stage.StageManager(stages)
+            stageManager = StageManager(stages)
 
             log("Registrando listeners...")
-            game.listeners(_root_ide_package_.net.winternetwork.bedwars.modules.stage.listener.FlagListener(this))
+            game.listeners(FlagListener(this))
         }
     }
 

@@ -7,10 +7,10 @@ import org.bukkit.Location
 import org.bukkit.configuration.ConfigurationSection
 
 data class GameMap(
-        override val name: String,
-        override val maxPlayers: Int,
-        override val lobbyLocation: Location,
-        override val locations: ArrayList<Location> = arrayListOf()
+    override val name: String,
+    override val maxPlayers: Int,
+    override val lobbyLocation: Location,
+    override val locations: ArrayList<Location> = arrayListOf()
 ) : IGameMap {
 
     fun setLocation(id: Int, location: Location) {
@@ -27,15 +27,15 @@ data class GameMap(
                 val i = id.toInt()
 
                 locations[i - 1] = LocationAdapter.from(
-                        section.getString("locations.$i")
+                    section.getString("locations.$i")
                 )
             }
 
             return GameMap(
-                    section.name,
-                    maxPlayers,
-                    LocationAdapter.from(section.getString("lobbyLocation")),
-                    locations
+                section.name,
+                maxPlayers,
+                LocationAdapter.from(section.getString("lobbyLocation")),
+                locations
             )
         }
     }
@@ -47,10 +47,10 @@ object LocationAdapter : Adapter<Location, String> {
     override fun from(c: String): Location {
         val split = c.split(";")
         return Location(
-                Bukkit.getWorld(split[0]),
-                split[1].toDouble(),
-                split[2].toDouble(),
-                split[3].toDouble()
+            Bukkit.getWorld(split[0]),
+            split[1].toDouble(),
+            split[2].toDouble(),
+            split[3].toDouble()
         )
     }
 

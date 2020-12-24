@@ -4,7 +4,7 @@ import net.winternetwork.bedwars.api.game.stage.Stage
 import net.winternetwork.bedwars.game.settings.GameSettings
 
 class StageManager(
-        private val stages: List<Stage>
+    private val stages: List<Stage>
 ) {
     lateinit var actualStage: Stage
         private set

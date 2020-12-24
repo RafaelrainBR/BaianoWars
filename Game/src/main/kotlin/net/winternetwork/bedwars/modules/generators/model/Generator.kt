@@ -7,8 +7,8 @@ import org.bukkit.block.Block
 import org.bukkit.configuration.ConfigurationSection
 
 data class Generator(
-        val name: String,
-        val type: Material
+    val name: String,
+    val type: Material
 ) {
 
     lateinit var block: Block
@@ -19,8 +19,8 @@ data class Generator(
     companion object {
         fun fromSection(section: ConfigurationSection): Generator {
             val generator = Generator(
-                    section.name,
-                    Material.matchMaterial(section.getString("drop_material"))
+                section.name,
+                Material.matchMaterial(section.getString("drop_material"))
             )
 
             val block = section.getConfigurationSection("block")
@@ -28,9 +28,9 @@ data class Generator(
 
             return generator.apply {
                 this.block = world.getBlockAt(
-                        block.getInt("x"),
-                        block.getInt("y"),
-                        block.getInt("z")
+                    block.getInt("x"),
+                    block.getInt("y"),
+                    block.getInt("z")
                 )
             }
         }

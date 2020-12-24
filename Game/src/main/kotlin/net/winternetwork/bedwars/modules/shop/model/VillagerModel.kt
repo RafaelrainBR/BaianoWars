@@ -9,12 +9,12 @@ object VillagerModel {
 
     fun spawnVillager(location: Location): Villager {
         return (location.world.spawnEntity(location, EntityType.VILLAGER) as Villager)
-                .apply {
-                    isCustomNameVisible = true
-                    customName = "§e§lLOJA"
+            .apply {
+                isCustomNameVisible = true
+                customName = "§e§lLOJA"
 
-                    setAi(false)
-                }
+                setAi(false)
+            }
     }
 
     private fun Entity.setAi(enabled: Boolean) {
@@ -23,17 +23,17 @@ object VillagerModel {
 
         val tagMethod = entity.javaClass.getMethod("getNBTTag")
         val tag = tagMethod.invoke(entity)
-                ?: Class.forName("net.minecraft.server.v1_8_R3.NBTTagCompound")
-                        .newInstance()
+            ?: Class.forName("net.minecraft.server.v1_8_R3.NBTTagCompound")
+                .newInstance()
 
         entity.javaClass.getMethod("c")
-                .invoke(entity, tag)
+            .invoke(entity, tag)
 
         val value = if (enabled) 0 else 1
         tag.javaClass.getMethod("setInt")
-                .invoke(tag, "NoAI", value)
+            .invoke(tag, "NoAI", value)
 
         entity.javaClass.getMethod("f")
-                .invoke(entity, tag)
+            .invoke(entity, tag)
     }
 }

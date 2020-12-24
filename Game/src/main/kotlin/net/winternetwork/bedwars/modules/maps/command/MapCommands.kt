@@ -9,32 +9,32 @@ import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
 class MapCommands(
-        private val mapManager: MapManager
+    private val mapManager: MapManager
 ) {
 
     @Command(
-            name = "mapsetup",
-            permission = "bedwars.command.mapsetup",
-            target = CommandTarget.PLAYER
+        name = "mapsetup",
+        permission = "bedwars.command.mapsetup",
+        target = CommandTarget.PLAYER
     )
     fun command(ctx: Context<CommandSender>) {
         ctx.sendMessage(arrayOf(
-                "",
-                "§e§l/mapsetup §fcreate §e<nome> §6§l- Cria um mapa",
-                "§e§l/mapsetup §flocation §e<nome> <id> §6§l- Seta location",
-                ""
+            "",
+            "§e§l/mapsetup §fcreate §e<nome> §6§l- Cria um mapa",
+            "§e§l/mapsetup §flocation §e<nome> <id> §6§l- Seta location",
+            ""
         ))
     }
 
     @Command(
-            name = "mapsetup.create",
-            permission = "bedwars.command.mapsetup"
+        name = "mapsetup.create",
+        permission = "bedwars.command.mapsetup"
     )
     fun create(ctx: Context<Player>, name: String, maxPlayers: Int) {
         GameMap(
-                name,
-                maxPlayers,
-                ctx.sender.location
+            name,
+            maxPlayers,
+            ctx.sender.location
         ).also {
             ctx.sendMessage(it.toString())
             mapManager.add(it.name, it)

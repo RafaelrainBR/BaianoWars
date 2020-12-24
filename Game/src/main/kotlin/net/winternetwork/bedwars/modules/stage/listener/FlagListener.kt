@@ -1,6 +1,7 @@
 package net.winternetwork.bedwars.modules.stage.listener
 
 import net.winternetwork.bedwars.api.game.flag.Flag
+import net.winternetwork.bedwars.modules.stage.StageModule
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
@@ -8,7 +9,7 @@ import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.player.PlayerLoginEvent
 
-class FlagListener(stageModule: _root_ide_package_.net.winternetwork.bedwars.modules.stage.StageModule) : Listener {
+class FlagListener(stageModule: StageModule) : Listener {
 
     private val stageManager = stageModule.stageManager
 

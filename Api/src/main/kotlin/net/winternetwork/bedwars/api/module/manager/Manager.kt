@@ -16,6 +16,8 @@ abstract class Manager<ID, V>(val config: YamlConfig) {
 
     fun remove(id: ID) = map.remove(id)
 
+    fun all() = map.values
+
     fun all(action: (V) -> Unit) = map.values.forEach(action)
 
     val name: String

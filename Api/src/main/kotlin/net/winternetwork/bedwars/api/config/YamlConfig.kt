@@ -18,14 +18,15 @@ class YamlConfig(
     private val file: File
 
     init {
-        if (!parent.exists() && !parent.mkdir())
-            throw IllegalStateException("Could not create parent file.")
+        with(parent) {
+            if (!exists() && !mkdir())
+                throw IllegalStateException("Could not create parent file.")
 
-        if (!parent.isDirectory)
-            throw IllegalArgumentException("Parent is not a directory.")
+            if (!isDirectory)
+                throw IllegalArgumentException("Parent is not a directory.")
+        }
 
         this.file = File(parent, fileName)
-
         reload()
     }
 
@@ -49,24 +50,23 @@ class YamlConfig(
         }
     }
 
+    fun section(name: String): ConfigurationSection {
+        return getConfigurationSection(name) ?: createSection(name)
+    }
+
     @Throws
     fun reload() =
-            with(file) {
-                if (!exists()) {
-                    plugin.saveResource(name, false)
-                }
+        with(file) {
+            if (!exists()) plugin.saveResource(name, false)
 
-                if (isDirectory) throw IllegalStateException("File is a directory.")
+            if (isDirectory) throw IllegalStateException("File is a directory.")
 
-                val reader = InputStreamReader(
-                        FileInputStream(file),
-                        StandardCharsets.UTF_8
-                )
+            val reader = InputStreamReader(
+                FileInputStream(this),
+                StandardCharsets.UTF_8
+            )
 
                 load(reader)
             }
 
-    fun section(name: String): ConfigurationSection {
-        return getConfigurationSection(name) ?: createSection(name)
-    }
 }

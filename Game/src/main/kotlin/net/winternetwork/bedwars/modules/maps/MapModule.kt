@@ -10,9 +10,9 @@ class MapModule : Module("Maps") {
 
     private val config: YamlConfig by lazy {
         YamlConfig(
-                game,
-                dataFolder,
-                "maps.yml"
+            game,
+            dataFolder,
+            "maps.yml"
         )
     }
 

@@ -3,15 +3,19 @@ package net.winternetwork.bedwars.modules.shop
 import me.saiintbrisson.minecraft.InventoryFrame
 import net.winternetwork.bedwars.api.module.Module
 import net.winternetwork.bedwars.game.game
+import net.winternetwork.bedwars.modules.shop.command.ShopCommands
+import net.winternetwork.bedwars.modules.shop.controller.ShopController
+import net.winternetwork.bedwars.modules.shop.listener.VillagerListener
+import net.winternetwork.bedwars.modules.shop.model.menu.MenuView
 import org.bukkit.entity.Entity
 
 class ShopModule : Module("Shop") {
 
-    val controller = _root_ide_package_.net.winternetwork.bedwars.modules.shop.controller.ShopController()
+    val controller = ShopController()
 
-    val view: _root_ide_package_.net.winternetwork.bedwars.modules.shop.model.menu.MenuView by lazy {
+    val view: MenuView by lazy {
         log("Abrindo hook ao inventory-framework")
-        _root_ide_package_.net.winternetwork.bedwars.modules.shop.model.menu.MenuView(game).apply {
+        MenuView(game).apply {
             InventoryFrame(game).registerListener()
         }
     }
@@ -19,9 +23,9 @@ class ShopModule : Module("Shop") {
     override fun init() {
         view
         log("Registrando comandos...")
-        game.commands(_root_ide_package_.net.winternetwork.bedwars.modules.shop.command.ShopCommands())
+        game.commands(ShopCommands())
         log("Registrando listeners...")
-        game.listeners(_root_ide_package_.net.winternetwork.bedwars.modules.shop.listener.VillagerListener())
+        game.listeners(VillagerListener())
     }
 
     override fun disable() {

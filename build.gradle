@@ -38,7 +38,7 @@ subprojects {
 
     shadowJar {
         if(!serverFolder.exists()){
-            serverFolder.mkDir()
+            serverFolder.mkdir()
         }
         destinationDirectory.set(new File(serverFolder, "plugins"))
     }

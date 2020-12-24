@@ -6,7 +6,7 @@ import net.winternetwork.bedwars.modules.maps.model.GameMap
 import net.winternetwork.bedwars.modules.maps.model.LocationAdapter
 
 class MapManager(
-        config: YamlConfig
+    config: YamlConfig
 ) : Manager<String, GameMap>(config) {
 
     override fun loadAll() {

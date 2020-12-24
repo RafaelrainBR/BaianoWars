@@ -40,7 +40,7 @@ fun disableModules() {
 
         it.manager?.let { manager ->
             logColoredMessage(
-                    "§b§l[%s] §7Descarregando %s...".format(it.name, manager.name)
+                "§b§l[%s] §7Descarregando %s...".format(it.name, manager.name)
             )
             manager.unloadAll()
         }
@@ -53,15 +53,16 @@ private inline fun KoinModule.initModule(crossinline block: Scope.() -> Module):
             moduleList.add(this)
 
             logColoredMessage(
-                    "§6§l[%s] §fIniciando modulo §e§l%s".format("Módulos", name)
+                "§6§l[%s] §fIniciando modulo §e§l%s".format("Módulos", name)
             )
             manager?.let {
                 logColoredMessage(
-                        "§b§l[%s] §7Carregando %s...".format(name, it.name)
+                    "§b§l[%s] §7Carregando %s...".format(name, it.name)
                 )
                 it.loadAll()
             }
             init()
         }
     }
+    99
 }

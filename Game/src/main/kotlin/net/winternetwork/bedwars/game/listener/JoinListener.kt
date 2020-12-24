@@ -15,11 +15,11 @@ class JoinListener : Listener {
     @EventHandler
     fun onJoin(e: PlayerJoinEvent) {
         e.joinMessage = "§e%s entrou. §f(%d/%d)"
-                .format(
-                        e.player.displayName,
-                        Bukkit.getOnlinePlayers().size,
-                        GameSettings.MAX_PLAYERS
-                )
+            .format(
+                e.player.displayName,
+                Bukkit.getOnlinePlayers().size,
+                GameSettings.MAX_PLAYERS
+            )
 
         if (GameSettings.canStart) {
             e.player.teleport(mapModule.manager.first.lobbyLocation)
