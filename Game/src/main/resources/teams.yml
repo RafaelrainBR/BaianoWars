@@ -1,0 +1,5 @@
+teams:
+  blue:
+    name: AZUL
+    chatColor: DARK_BLUE
+    leatherColor: BLUE

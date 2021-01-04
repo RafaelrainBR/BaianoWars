@@ -1,0 +1,3 @@
+rootProject.name = "BaianoWars"
+include("Api")
+include("Game")
