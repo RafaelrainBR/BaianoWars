@@ -1,6 +1,6 @@
 name: BedwarsCore
 version: 1.1-SNAPSHOT
-main: net.winternetwork.bedwars.game.Game
+main: br.redebaiana.baianowars.game.Game
 depend:
   - Multiverse-Core
   - HolographicDisplays
