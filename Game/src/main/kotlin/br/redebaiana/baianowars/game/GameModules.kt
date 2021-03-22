@@ -65,18 +65,11 @@ private inline fun <reified T : Module> KoinModule.initModule(crossinline block:
                 it.loadAll()
             }
 
-            //measureTimeMillis {
             try {
                 init()
             } catch (e: Exception) {
                 IllegalStateException("Error trying to enable module: $name", e).printStackTrace()
             }
-//            }.let {
-//                logColoredMessage(
-//                    "§f[$name]§7 Modulo iniciado! (${it}ms)"
-//                )
-//            }
-
         }
     }
 }

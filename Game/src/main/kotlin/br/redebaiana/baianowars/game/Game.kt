@@ -12,7 +12,7 @@ import kotlin.system.measureTimeMillis
 
 class Game : ServerPlugin() {
 
-    private val koinApplication: KoinApplication by lazy { initModules() }
+    private lateinit var koinApplication: KoinApplication
 
     private lateinit var moduleScheduler: ModuleScheduler
 
@@ -24,9 +24,12 @@ class Game : ServerPlugin() {
             GameSettings.canStart = config.getBoolean("canStart")
 
             launch {
-                val time = measureTimeMillis { koinApplication }
-                logColoredMessage("§6§l[Módulos]§f Modulos inicializados com sucesso! (${time}ms)")
-            }.invokeOnCompletion {
+                measureTimeMillis {
+                    koinApplication = initModules()
+                }.let {
+                    logColoredMessage("§6§l[Módulos]§f Modulos inicializados com sucesso! (${it}ms)")
+                }
+
                 moduleScheduler = ModuleScheduler(moduleList)
             }
 
