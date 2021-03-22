@@ -1,6 +1,5 @@
 package br.redebaiana.baianowars.modules.generators
 
-import br.redebaiana.baianowars.api.config.YamlConfig
 import br.redebaiana.baianowars.api.module.Module
 import br.redebaiana.baianowars.api.util.applyMeta
 import br.redebaiana.baianowars.game.game
@@ -22,13 +21,7 @@ class GeneratorsModule(
 
     val setupMap = hashMapOf<String, String>()
 
-    private val config: YamlConfig by lazy {
-        YamlConfig(
-            game,
-            dataFolder,
-            "generators.yml"
-        )
-    }
+    private val config by config(game, name = "generators.yml")
 
     override val manager = GeneratorManager(config)
 

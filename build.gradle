@@ -10,8 +10,37 @@ def serverFolder = new File(project.projectDir, "server")
 
 subprojects {
     apply plugin: 'org.jetbrains.kotlin.jvm'
-    apply plugin: 'com.github.johnrengelman.shadow'
 
+    def projectName = it.name
+
+    if(projectName != "Api") {
+        apply plugin: 'com.github.johnrengelman.shadow'
+
+        shadowJar {
+            if(!serverFolder.exists()){
+                serverFolder.mkdir()
+            }
+            destinationDirectory.set(new File(serverFolder, "plugins"))
+        }
+    }
+
+    dependencies() {
+        if(projectName != "Api") {
+            compile "org.slf4j:slf4j-api:1.7.30"
+            compile "org.slf4j:slf4j-simple:1.7.30"
+        }
+
+        compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
+
+        compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.31"
+        compile 'org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.4.2'
+        compile "org.koin:koin-core:2.2.2"
+
+        compile "com.github.SaiintBrisson.command-framework:bukkit:1.0.0"
+    }
+}
+
+allprojects {
     repositories {
         jcenter()
         mavenCentral()
@@ -20,26 +49,7 @@ subprojects {
         maven { url("https://repo.codemc.io/repository/maven-public/") }
     }
 
-    dependencies {
-        compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
-
-        compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.31"
-        compile "org.koin:koin-core:2.1.6"
-
-        compile "com.github.SaiintBrisson.command-framework:bukkit:1.0.0"
-
-        compile "org.slf4j:slf4j-api:1.7.30"
-        compile "org.slf4j:slf4j-simple:1.7.30"
-    }
-
     compileKotlin {
         kotlinOptions.jvmTarget = "1.8"
-    }
-
-    shadowJar {
-        if(!serverFolder.exists()){
-            serverFolder.mkdir()
-        }
-        destinationDirectory.set(new File(serverFolder, "plugins"))
     }
 }

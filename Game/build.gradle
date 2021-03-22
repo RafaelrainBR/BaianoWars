@@ -1,6 +1,5 @@
 dependencies {
     implementation project(":Api")
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.4.2'
     implementation 'com.github.SaiintBrisson:inventory-framework:3e3d5945b2'
     compileOnly 'com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.2'
 }

@@ -18,7 +18,7 @@ class ScoreModule(stageModule: StageModule) : Module("Score") {
     val scoreMap = mutableMapOf<String, Score>()
 
     override fun init() {
-        log("registrando listeners...")
+        log("Registrando listeners...")
         game.listeners(ModuleListener())
     }
 

@@ -3,6 +3,7 @@ package br.redebaiana.baianowars.api.config
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.plugin.Plugin
+import org.bukkit.util.FileUtil
 import java.io.File
 import java.io.FileInputStream
 import java.io.IOException
@@ -12,7 +13,7 @@ import java.nio.charset.StandardCharsets
 class YamlConfig(
     private val plugin: Plugin,
     parent: File,
-    fileName: String
+    private val fileName: String
 ) : YamlConfiguration() {
 
     private val file: File
@@ -58,16 +59,21 @@ class YamlConfig(
     @Throws
     fun reload() =
         with(file) {
-            if (!exists()) plugin.saveResource(name, false)
+            if (!exists()) {
+                plugin.saveResource(name, false)
+
+                File(plugin.dataFolder, name).let {
+                    FileUtil.copy(it, this)
+                    delete()
+                }
+            }
 
             if (isDirectory) throw IllegalStateException("File is a directory.")
 
-            val reader = InputStreamReader(
+            InputStreamReader(
                 FileInputStream(this),
                 StandardCharsets.UTF_8
-            )
-
-                load(reader)
-            }
+            ).let { load(it) }
+        }
 
 }

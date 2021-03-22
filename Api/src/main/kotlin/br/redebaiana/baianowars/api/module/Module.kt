@@ -1,6 +1,8 @@
 package br.redebaiana.baianowars.api.module
 
+import br.redebaiana.baianowars.api.config.YamlConfig
 import br.redebaiana.baianowars.api.module.manager.Manager
+import org.bukkit.plugin.Plugin
 import java.io.File
 
 abstract class Module(val name: String) {
@@ -19,7 +21,16 @@ abstract class Module(val name: String) {
 
     fun log(text: String) {
         println(
-                "[%s] %s".format(name, text)
+            "[%s] %s".format(name, text)
         )
     }
+
+    protected fun config(plugin: Plugin, name: String) =
+        lazy(LazyThreadSafetyMode.PUBLICATION) {
+            YamlConfig(
+                plugin,
+                dataFolder,
+                name
+            )
+        }
 }
